@@ -9,17 +9,18 @@ import android.widget.TextView;
 
 import com.example.qrcodefyp.R;
 
-public class SigUpActivity extends AppCompatActivity {
-    private TextView buttonLogin;
+public class LoginActivity extends AppCompatActivity {
+    private TextView buttonSignup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sig_up);
-        buttonLogin=findViewById(R.id.button_login);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_login);
+        buttonSignup=findViewById(R.id.button_signup);
+        buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                startActivity(new Intent(LoginActivity.this,SigUpActivity.class));
             }
         });
     }
