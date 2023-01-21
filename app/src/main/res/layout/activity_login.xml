@@ -88,7 +88,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/_12sdp"
                 android:textColor="@color/colorPrimary"
-                android:text="Forget Password?"/>
+                android:text="Forgot Password?"/>
         </RelativeLayout>
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
