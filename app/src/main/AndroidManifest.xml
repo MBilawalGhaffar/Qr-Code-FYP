@@ -14,25 +14,37 @@
         android:theme="@style/Theme.QrCodeFYP"
         tools:targetApi="31">
         <activity
+            android:name=".activity.Home"
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.LoginActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.NoActionBar">
 
         </activity>
         <activity
             android:name=".activity.SigUpActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.NoActionBar">
 
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name=".activity.SplashScreen"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
