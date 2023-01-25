@@ -5,11 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/my_drawer_layout"
-    tools:openDrawer="start"
+
     tools:context=".activity.Home">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:id="@+id/button_add"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/colorPrimary"
+            android:layout_margin="@dimen/_20sdp"
+            app:cardElevation="@dimen/_12sdp"
+            app:cardCornerRadius="@dimen/_12sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12sdp"
+                android:src="@drawable/fab_add_icon"/>
+        </com.google.android.material.card.MaterialCardView>
 
     </RelativeLayout>
     <com.google.android.material.navigation.NavigationView

@@ -53,7 +53,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         switch (item.getItemId()){
             case R.id.logout: {
                 logoutUser();
-                Toast.makeText(Home.this,"Logout",Toast.LENGTH_SHORT).show();
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START);

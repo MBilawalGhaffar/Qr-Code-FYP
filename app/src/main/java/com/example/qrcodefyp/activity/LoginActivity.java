@@ -30,8 +30,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.checkbox.MaterialCheckBox;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +48,10 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     String TAG ="Google_SignIn";
+    private TextInputEditText etEmail;
+    private TextInputEditText etPassword;
+    private MaterialCheckBox cbRememberMe;
+    private MaterialButton buttonLogin;
     private TextView buttonSignup;
     private TextView buttonForgotPassword;
     private MaterialCardView buttonGoogleLogin;
@@ -58,6 +66,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        cbRememberMe=findViewById(R.id.cb_remember_me);
+        etEmail=findViewById(R.id.et_email);
+        etPassword=findViewById(R.id.et_password);
+        buttonLogin=findViewById(R.id.button_login);
         buttonSignup=findViewById(R.id.button_signup);
         buttonGoogleLogin=findViewById(R.id.button_google_login);
         buttonForgotPassword=findViewById(R.id.button_forget_password);
@@ -82,9 +94,17 @@ public class LoginActivity extends AppCompatActivity {
         buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn();
+                googleSignIn();
             }
         });
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.show();
+                login();
+            }
+        });
+
         buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,10 +115,67 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-    private void signIn() {
+
+    private void login() {
+        if(cbRememberMe.isChecked()){
+            isRemember=true;
+        }else {
+            isRemember=false;
+        }
+        String mEmail=etEmail.getText().toString();
+        String mPassword=etPassword.getText().toString();
+        if(mEmail.isEmpty()){
+            dialog.dismiss();
+            etEmail.setError("Field can't be  empty");
+            return;
+        }
+        if(mPassword.isEmpty()){
+            dialog.dismiss();
+            etPassword.setError("Field can't be  empty");
+            return;
+        }
+        if(!mEmail.contains("@gmail.com")){
+            dialog.dismiss();
+            Toast.makeText(LoginActivity.this,"Please enter valid email",Toast.LENGTH_SHORT).show();
+        }else {
+            mAuth.signInWithEmailAndPassword(mEmail,mPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+                        FirebaseUser user=mAuth.getCurrentUser();
+                        assert user != null;
+                        if(user.isEmailVerified()){
+                            User mUser=new User(user.getUid(),user.getDisplayName(),user.getEmail());
+                            new UserPreference(LoginActivity.this).addUser(mUser);
+                            new AuthPreference(LoginActivity.this).addAuth(new UserAuth(true,isRemember));
+                            FirebaseUtil.USER=mUser;
+                            dialog.dismiss();
+                            Toast.makeText(LoginActivity.this,"You login with "+mUser.getEmail().toString(),Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this,Home.class));
+                            finish();
+                        }else {
+                            dialog.dismiss();
+                            Toast.makeText(LoginActivity.this,"Your email verification is required, Please check your email",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    dialog.dismiss();
+                    Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    }
+
+    private void googleSignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
@@ -115,12 +192,14 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG,"uuid -> "+user.getUid().toString());
                             Log.d(TAG,"name -> "+user.getDisplayName().toString());
                             Log.d(TAG,"email -> "+user.getEmail().toString());
-                            //  updateUI(user);
-                        } else {
-                            dialog.dismiss();
-                            Toast.makeText(LoginActivity.this,"Login failed",Toast.LENGTH_SHORT).show();
                         }
 
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
+                        Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -138,13 +217,16 @@ public class LoginActivity extends AppCompatActivity {
                     new AuthPreference(LoginActivity.this).addAuth(new UserAuth(true,isRemember));
                     FirebaseUtil.USER=mUser;
                     dialog.dismiss();
-                    Toast.makeText(LoginActivity.this,"You login as "+mUser.getEmail().toString(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"You login with "+mUser.getEmail().toString(),Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this,Home.class));
                     finish();
-                }else {
-                    dialog.dismiss();
-                    Toast.makeText(LoginActivity.this,"Login failed",Toast.LENGTH_SHORT).show();
                 }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                dialog.dismiss();
+                Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 

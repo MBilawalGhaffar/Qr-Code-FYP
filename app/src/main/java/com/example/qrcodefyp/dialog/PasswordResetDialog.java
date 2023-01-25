@@ -53,13 +53,14 @@ public class PasswordResetDialog extends Dialog {
             public void onClick(View view) {
                 mEmail=etEmail.getText().toString().toLowerCase(Locale.ROOT);
                 if(mEmail.isEmpty()){
-                    Toast.makeText(mContext,"Please enter email first",Toast.LENGTH_SHORT).show();
+                    etEmail.setError("Field can't be  empty");
                     return;
                 }
                 if(mEmail.contains("@gmail.com")){
                     sendLink(mEmail);
                 }else {
-                    etEmail.setError("Email not valid, please enter valid email.");
+                    Toast.makeText(mContext,"Please enter valid email",Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -81,15 +82,12 @@ public class PasswordResetDialog extends Dialog {
                     dismiss();
                     Toast.makeText(mContext,"Email is sent to you, please check your email.",Toast.LENGTH_LONG).show();
                 }
-                else {
-                    Toast.makeText(mContext,"Error Occurred,try again",Toast.LENGTH_LONG).show();
-                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 loadingBar.dismiss();
-                Toast.makeText(mContext,"Error Failed",Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,e.getMessage().toString(),Toast.LENGTH_LONG).show();
             }
         });
     }
