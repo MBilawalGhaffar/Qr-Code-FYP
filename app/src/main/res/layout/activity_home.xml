@@ -11,22 +11,441 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_120sdp"
+            android:id="@+id/budget_layout"
+            android:layout_margin="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_12sdp"
+            app:cardElevation="@dimen/_8sdp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_total_sar"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="100 SAR"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_20sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="Monthly Budget"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_10sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_left_sar"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="40 SAR"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="@dimen/_20sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="Budget left"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+
+
+                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp"
+                        android:id="@+id/progress_bar"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:cpb_background_progressbar_color="@color/progress_background"
+                        app:cpb_background_progressbar_width="@dimen/_18sdp"
+                        app:cpb_progress_direction="to_right"
+                        app:cpb_progressbar_color="@color/colorPrimary"
+                        app:cpb_progressbar_width="@dimen/_10sdp"
+                        app:cpb_round_border="true"
+                        app:cpb_progress="60"
+                        app:cpb_progress_max="100"
+                        />
+                <RelativeLayout
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_used_sar"
+                        android:layout_centerInParent="true"
+                        android:text="60"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_18sdp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_below="@id/budget_layout">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="28"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="horizontal">
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/button_receipt"
+                    android:layout_margin="@dimen/_6sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/progress_background"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_4sdp"
+                    android:layout_weight="50">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="80"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/my_receipt_icon"
+                            android:layout_marginTop="@dimen/_5sdp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="25"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_14sdp"
+                            android:textColor="@color/colorPrimary"
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:text="My Receipts"
+                            android:layout_marginBottom="@dimen/_5sdp"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/button_bill"
+                    android:layout_margin="@dimen/_6sdp"
+                    app:cardBackgroundColor="@color/progress_background"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_4sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_weight="50">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="80"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/my_bill_icon"
+                            android:layout_marginTop="@dimen/_5sdp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="25"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_14sdp"
+                            android:textColor="@color/colorPrimary"
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:text="My Bills"
+                            android:layout_marginBottom="@dimen/_5sdp"/>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="28"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="horizontal">
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/button_expense"
+                    android:layout_margin="@dimen/_6sdp"
+                    app:cardBackgroundColor="@color/progress_background"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_4sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_weight="50">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="80"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/my_expense_icon"
+                            android:layout_marginTop="@dimen/_5sdp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="25"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_14sdp"
+                            android:textColor="@color/colorPrimary"
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:text="My Expenses"
+                            android:layout_marginBottom="@dimen/_5sdp"/>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/button_converter"
+                    android:layout_margin="@dimen/_6sdp"
+                    app:cardBackgroundColor="@color/progress_background"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_4sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_weight="50">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="80"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/my_conversion_icon"
+                            android:layout_marginTop="@dimen/_5sdp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="25"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/colorPrimary"
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Currency Converter"
+                            android:layout_marginBottom="@dimen/_5sdp"/>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="28"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="50">
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:id="@+id/button_shop"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/progress_background"
+                        app:cardCornerRadius="@dimen/_12sdp"
+                        app:cardElevation="@dimen/_4sdp"
+                        android:layout_margin="@dimen/_6sdp"
+                        android:layout_weight="50">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="75"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/my_shop_icon"
+                                android:layout_marginTop="@dimen/_5sdp"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="25"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_14sdp"
+                                android:textColor="@color/colorPrimary"
+                                android:gravity="center_horizontal"
+                                android:layout_gravity="center_horizontal"
+                                android:text="Shops"
+                                android:layout_marginBottom="@dimen/_5sdp"/>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="50">
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:id="@+id/button_setting"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_margin="@dimen/_6sdp"
+                        app:cardBackgroundColor="@color/progress_background"
+                        app:cardCornerRadius="@dimen/_12sdp"
+                        app:cardElevation="@dimen/_4sdp"
+                        android:layout_weight="50">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="80"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/my_setting_icon"
+                                android:layout_marginTop="@dimen/_5sdp"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="25"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_14sdp"
+                                android:textColor="@color/colorPrimary"
+                                android:gravity="center_horizontal"
+                                android:layout_gravity="center_horizontal"
+                                android:text="Setting"
+                                android:layout_marginBottom="@dimen/_5sdp"/>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="50">
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:id="@+id/button_profile"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_margin="@dimen/_6sdp"
+                        app:cardBackgroundColor="@color/progress_background"
+                        app:cardCornerRadius="@dimen/_12sdp"
+                        app:cardElevation="@dimen/_4sdp"
+                        android:layout_weight="50">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="80"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/my_profile_icon"
+                                android:layout_marginTop="@dimen/_5sdp"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="25"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_14sdp"
+                                android:textColor="@color/colorPrimary"
+                                android:gravity="center_horizontal"
+                                android:layout_gravity="center_horizontal"
+                                android:text="Profile"
+                                android:layout_marginBottom="@dimen/_5sdp"/>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="16"
+                android:layout_marginEnd="@dimen/_70sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:orientation="horizontal">
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_6sdp"
+                    app:cardBackgroundColor="@color/progress_background"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_4sdp">
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/button_add"
             android:layout_width="@dimen/_45sdp"
             android:layout_height="@dimen/_45sdp"
-            android:id="@+id/button_add"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:clickable="true"
             android:focusable="true"
             app:cardBackgroundColor="@color/colorPrimary"
-            android:layout_margin="@dimen/_20sdp"
-            app:cardElevation="@dimen/_12sdp"
             app:cardCornerRadius="@dimen/_12sdp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true">
+            app:cardElevation="@dimen/_8sdp">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_12sdp"
-                android:src="@drawable/fab_add_icon"/>
+                android:src="@drawable/fab_add_icon" />
         </com.google.android.material.card.MaterialCardView>
 
     </RelativeLayout>
