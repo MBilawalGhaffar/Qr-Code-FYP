@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/my_drawer_layout"
-
     tools:context=".activity.Home">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -62,8 +62,7 @@
                         android:textSize="@dimen/_10sdp" />
                 </LinearLayout>
 
-
-                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:id="@+id/progress_bar"
@@ -79,6 +78,7 @@
                         app:cpb_progress="60"
                         app:cpb_progress_max="100"
                         />
+
                 <RelativeLayout
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_100sdp"

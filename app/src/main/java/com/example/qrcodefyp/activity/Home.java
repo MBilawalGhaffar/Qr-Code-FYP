@@ -6,16 +6,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.qrcodefyp.R;
+import com.example.qrcodefyp.dialog.AddReceiptDialog;
 import com.example.qrcodefyp.model.User;
 import com.example.qrcodefyp.model.UserAuth;
 import com.example.qrcodefyp.preference.AuthPreference;
 import com.example.qrcodefyp.preference.UserPreference;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -24,6 +29,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
+    private MaterialCardView buttonAddReceipt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.activity_home);
         user=new UserPreference(Home.this).getUser();
         drawerLayout = findViewById(R.id.my_drawer_layout);
+        buttonAddReceipt=findViewById(R.id.button_add);
         navigationView=findViewById(R.id.nav_view);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -38,7 +46,21 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        buttonAddReceipt.setOnClickListener(view ->{
+                    addReceiptDialog();
+                }
+        );
     }
+
+    private void addReceiptDialog() {
+        Dialog passwordDialog=new AddReceiptDialog(Home.this,R.style.ReceiptDialog);
+        passwordDialog.setCancelable(false);
+        passwordDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        passwordDialog.show();
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 

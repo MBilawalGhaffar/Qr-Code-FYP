@@ -85,12 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_wait1);
         dialog.setCanceledOnTouchOutside(false);
-        buttonSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,SigUpActivity.class));
-            }
-        });
+        buttonSignup.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this,SigUpActivity.class)));
         buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dialog passwordDialog=new PasswordResetDialog(LoginActivity.this,R.style.Dialog);
+                Dialog passwordDialog=new PasswordResetDialog(LoginActivity.this,R.style.ReceiptDialog);
                 passwordDialog.setCancelable(false);
                 passwordDialog.show();
             }
