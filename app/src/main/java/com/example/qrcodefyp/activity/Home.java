@@ -1,11 +1,19 @@
 package com.example.qrcodefyp.activity;
 
+import androidx.activity.ComponentActivity;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +33,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static final int ALL_PERMISSION_CODE = 101;
+    private ActivityResultLauncher<String> cameraPermissionLauncher;
+    private AddReceiptDialog.ReturnCallback returnCallback;
+
     private User user;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -52,13 +64,49 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     addReceiptDialog();
                 }
         );
+
+
+        ActivityResultLauncher<Intent> someActivityResultLauncher =registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            // Here, no request code
+                            Intent data = result.getData();
+
+                        }
+                    }
+                });
+
+
+
+//        requestAllPermission();
+
+        cameraPermissionLauncher=registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(), isGranted -> {
+                    returnCallback.returnCall(isGranted);
+                });
+
     }
 
+    private void requestAllPermission() {
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA},ALL_PERMISSION_CODE);
+    }
+    public interface Callback {
+        void call(AddReceiptDialog.ReturnCallback returnCallback);
+    }
     private void addReceiptDialog() {
-        Dialog passwordDialog=new AddReceiptDialog(Home.this,R.style.ReceiptDialog);
-        passwordDialog.setCancelable(false);
-        passwordDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        passwordDialog.show();
+        Dialog addReceiptDialog=new AddReceiptDialog(Home.this,R.style.ReceiptDialog,new Callback(){
+            @Override
+            public void call(AddReceiptDialog.ReturnCallback mreturnCallback) {
+                returnCallback=mreturnCallback;
+                cameraPermissionLauncher.launch(Manifest.permission.CAMERA);
+            }
+        });
+        addReceiptDialog.setCancelable(false);
+        addReceiptDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        addReceiptDialog.show();
     }
 
     @Override

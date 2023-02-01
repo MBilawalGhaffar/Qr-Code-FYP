@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".MyApplication"
@@ -13,6 +17,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QrCodeFYP"
         tools:targetApi="31">
+<!--        <activity-->
+<!--            android:name=".QrCodeScannerActivity"-->
+<!--            android:exported="false">-->
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+<!--        </activity>-->
+        <activity
+            android:name=".activity.QrCodeScannerActivity"
+            android:exported="false"
+            android:label="Scan Qr"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.google.zxing.client.android.SCAN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".activity.Home"
             android:exported="false"
@@ -25,22 +51,12 @@
             android:name=".activity.LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.NoActionBar"></activity>
         <activity
             android:name=".activity.SigUpActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.NoActionBar">
-
-        </activity>
-        <activity
-            android:name=".activity.MainActivity"
-            android:exported="true"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:theme="@style/Theme.NoActionBar"></activity>
         <activity
             android:name=".activity.SplashScreen"
             android:exported="true"
@@ -52,6 +68,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>
