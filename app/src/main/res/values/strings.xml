@@ -3,4 +3,5 @@
     <string name="splash_text">Splash</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="cam_image_file_name">camImageFile.jpg</string>
 </resources>

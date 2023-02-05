@@ -47,7 +47,7 @@
 
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_text"
+                android:id="@+id/et_total_bill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"/>
@@ -147,6 +147,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/image_pick_lt"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:orientation="horizontal">
@@ -205,6 +206,19 @@
 
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/image_picked_lt"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:id="@+id/picked_image"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
@@ -220,7 +234,6 @@
             android:textSize="@dimen/_16sdp"
             android:textStyle="bold"
             app:elevation="@dimen/_20sdp" />
-
 
 
     </LinearLayout>

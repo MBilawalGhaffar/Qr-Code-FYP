@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -16,13 +17,19 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.example.qrcodefyp.BuildConfig;
 import com.example.qrcodefyp.R;
+import com.example.qrcodefyp.callback.OnImagePicked;
+import com.example.qrcodefyp.callback.OnImagePicker;
 import com.example.qrcodefyp.dialog.AddReceiptDialog;
 import com.example.qrcodefyp.model.User;
 import com.example.qrcodefyp.model.UserAuth;
@@ -31,11 +38,21 @@ import com.example.qrcodefyp.preference.UserPreference;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
+import org.jetbrains.annotations.Nullable;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int ALL_PERMISSION_CODE = 101;
     private ActivityResultLauncher<String> cameraPermissionLauncher;
     private AddReceiptDialog.ReturnCallback returnCallback;
+    private ActivityResultLauncher<Intent> galleryActivityResultLauncher;
+    private ActivityResultLauncher<Intent> cameraActivityResultLauncher;
+    private @Nullable OnImagePicked onImagePicked;
 
     private User user;
     private DrawerLayout drawerLayout;
@@ -66,7 +83,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         );
 
 
-        ActivityResultLauncher<Intent> someActivityResultLauncher =registerForActivityResult(
+        galleryActivityResultLauncher =registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
@@ -74,19 +91,51 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             // Here, no request code
                             Intent data = result.getData();
-
+                            Uri uri=data.getData();
+                            CropImage.activity(uri)
+                                    .setGuidelines(CropImageView.Guidelines.ON)
+                                    .start(Home.this);
                         }
                     }
                 });
 
+        cameraActivityResultLauncher=registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+
+                            File captureFile=new File(getExternalCacheDir(),getString(R.string.cam_image_file_name));
+                            if(captureFile.exists()){
+                                @Nullable Uri uri;
+                                try {
+                                    uri= Uri.fromFile(captureFile);
+                                }catch (Exception e){
+                                    uri=FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider", captureFile);
+                                }
+
+                                CropImage.activity(uri)
+                                        .setGuidelines(CropImageView.Guidelines.ON)
+                                        .start(Home.this);
+                            }
+                        }else{
+                            Toast.makeText(Home.this,"Error while capturing image!",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }
+        );
 
 
-//        requestAllPermission();
 
         cameraPermissionLauncher=registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(), isGranted -> {
                     returnCallback.returnCall(isGranted);
                 });
+
+        requestAllPermission();
 
     }
 
@@ -103,10 +152,35 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 returnCallback=mreturnCallback;
                 cameraPermissionLauncher.launch(Manifest.permission.CAMERA);
             }
+        },new OnImagePicker(){
+            @Override
+            public void onImagePicker(OnImagePicked callback, Boolean camera) {
+                onImagePicked=callback;
+                if (camera){
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider", createImageFile());
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    cameraActivityResultLauncher.launch(intent);
+                }else {
+
+                    Intent intent=new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    galleryActivityResultLauncher.launch(intent);
+                }
+
+
+            }
         });
         addReceiptDialog.setCancelable(false);
         addReceiptDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         addReceiptDialog.show();
+    }
+
+    private File createImageFile() {
+        File camImageFile = new File(getExternalCacheDir(),getString(R.string.cam_image_file_name));
+        return camImageFile;
+
     }
 
     @Override
@@ -145,5 +219,26 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             return;
         }
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if(resultCode== RESULT_OK){
+                try {
+                    Uri uri = result.getUri();
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    if(onImagePicked!=null){
+                        onImagePicked.onImagePicked(uri,bitmap);
+                    }
+                }catch (Exception e){
+                    Toast.makeText(this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                    onImagePicked.onImagePicked(null,null);
+                }
+
+            }
+        }
     }
 }
