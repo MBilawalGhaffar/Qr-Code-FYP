@@ -54,6 +54,7 @@ import com.google.firebase.storage.UploadTask;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Random;
 import java.util.TimeZone;
 import java.util.UUID;
 
@@ -284,28 +285,51 @@ public class AddReceiptDialog extends Dialog {
         });
 
     }
+    public static String getRandomNumberString() {
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
+    }
 
     private void addReceipt(ReceiptModel receiptModel) {
-        StorageReference ref=storageReference.child("IMAGE/"+UUID.randomUUID().toString());
+        String id=getRandomNumberString();
+        receiptModel.setId(id);
+        StorageReference ref=storageReference.child("IMAGE/"+id);
         ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 if(taskSnapshot.getTask().isSuccessful()){
-                    String imageUrl=taskSnapshot.getStorage().getDownloadUrl().toString();
-                    receiptModel.setImage_url(imageUrl);
-                    mDatabase.getReference().child(DB_RECEIPT_REF).child(user.getUid()).setValue(receiptModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                dialog.dismiss();
-                                dismiss();
-                                Toast.makeText(mHome,"Receipt add Successfully",Toast.LENGTH_SHORT).show();
+                        public void onSuccess(Uri uri) {
+                            receiptModel.setImage_url(uri.toString());
+                            mDatabase.getReference().child(DB_RECEIPT_REF).child(user.getUid()).child(id).setValue(receiptModel)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                dialog.dismiss();
+                                                dismiss();
+                                                Toast.makeText(mHome,"Receipt add Successfully",Toast.LENGTH_SHORT).show();
 
-                            }else {
-                                dialog.dismiss();
-                                Toast.makeText(mHome,"Failed",Toast.LENGTH_SHORT).show();
-                            }
+                                            }else {
+                                                dialog.dismiss();
+                                                Toast.makeText(mHome,"Failed",Toast.LENGTH_SHORT).show();
+                                            }
 
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            dialog.dismiss();
+                                            Toast.makeText(mHome,"Failed,"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -314,8 +338,9 @@ public class AddReceiptDialog extends Dialog {
                             Toast.makeText(mHome,"Failed,"+e.getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     });
-
-
+                }else {
+                    dialog.dismiss();
+                    Toast.makeText(mHome,"Failed...",Toast.LENGTH_SHORT).show();
                 }
 
             }

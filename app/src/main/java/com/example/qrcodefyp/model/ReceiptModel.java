@@ -1,6 +1,7 @@
 package com.example.qrcodefyp.model;
 
 public class ReceiptModel {
+    private String id;
     private String total_bill;
     private String description;
     private String category;
@@ -8,7 +9,8 @@ public class ReceiptModel {
     private String expiry_date;
     private String image_url;
 
-    public ReceiptModel(String total_bill, String description, String category, String payment, String expiry_date, String image_url) {
+    public ReceiptModel(String id, String total_bill, String description, String category, String payment, String expiry_date, String image_url) {
+        this.id=id;
         this.total_bill = total_bill;
         this.description = description;
         this.category = category;
@@ -18,6 +20,14 @@ public class ReceiptModel {
     }
 
     public ReceiptModel() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTotal_bill() {
