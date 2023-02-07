@@ -4,6 +4,7 @@ package com.example.qrcodefyp.preference;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.qrcodefyp.model.BudgetModel;
 import com.example.qrcodefyp.model.User;
 
 public class BudgetPreference {
@@ -11,18 +12,20 @@ public class BudgetPreference {
     public BudgetPreference(Context context){
         sharedPreferences=context.getSharedPreferences("BUDGET",Context.MODE_PRIVATE);
     }
-    public User getUser() {
-        String name=sharedPreferences.getString("name","Ali");
-        String uid=sharedPreferences.getString("uuid","00000000");
-        String email=sharedPreferences.getString("email","ali@gmail.com");
-        return new User(uid,name,email);
+    public BudgetModel getBudget() {
+        int totalBudget=sharedPreferences.getInt("totalBudget",100);
+        int usedBudget=sharedPreferences.getInt("usedBudget",20);
+        int remainingBudget=sharedPreferences.getInt("remainingBudget",80);
+        String currency=sharedPreferences.getString("currency","SAR");
+        return new BudgetModel(totalBudget,usedBudget,remainingBudget,currency);
 
     }
-    public void addUser(User user) {
+    public void addBudget(BudgetModel budgetModel) {
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
-        myEdit.putString("name",user.getName());
-        myEdit.putString("uuid",user.getUUID());
-        myEdit.putString("email",user.getEmail());
+        myEdit.putInt("totalBudget",budgetModel.getTotalBudget());
+        myEdit.putInt("usedBudget",budgetModel.getUsedBudget());
+        myEdit.putInt("remainingBudget",budgetModel.getRemainingBudget());
+        myEdit.putString("currency",budgetModel.getCurrency());
         myEdit.apply();
     }
 }

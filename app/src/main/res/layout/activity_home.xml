@@ -87,9 +87,9 @@
                     android:layout_marginEnd="@dimen/_10sdp">
 
                     <TextView
+                        android:id="@+id/tv_used_sar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_used_sar"
                         android:layout_centerInParent="true"
                         android:text="60"
                         android:textAllCaps="true"

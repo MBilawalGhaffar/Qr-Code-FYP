@@ -22,8 +22,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.qrcodefyp.BuildConfig;
@@ -31,13 +33,16 @@ import com.example.qrcodefyp.R;
 import com.example.qrcodefyp.callback.OnImagePicked;
 import com.example.qrcodefyp.callback.OnImagePicker;
 import com.example.qrcodefyp.dialog.AddReceiptDialog;
+import com.example.qrcodefyp.model.BudgetModel;
 import com.example.qrcodefyp.model.User;
 import com.example.qrcodefyp.model.UserAuth;
 import com.example.qrcodefyp.preference.AuthPreference;
+import com.example.qrcodefyp.preference.BudgetPreference;
 import com.example.qrcodefyp.preference.UserPreference;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -58,7 +63,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
-    private MaterialCardView buttonAddReceipt;
+    private MaterialCardView buttonAddReceipt,buttonExpense;
+
+    private BudgetModel budgetModel;
+    private TextView tvTotal,tvUsed,tvRemaining;
+    private CircularProgressBar circularProgressBar;
 
 
     @Override
@@ -67,7 +76,16 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.activity_home);
         user=new UserPreference(Home.this).getUser();
         drawerLayout = findViewById(R.id.my_drawer_layout);
+        circularProgressBar=findViewById(R.id.progress_bar);
         buttonAddReceipt=findViewById(R.id.button_add);
+        buttonExpense=findViewById(R.id.button_expense);
+        tvTotal=findViewById(R.id.tv_total_sar);
+        tvUsed=findViewById(R.id.tv_used_sar);
+        tvRemaining=findViewById(R.id.tv_left_sar);
+
+
+        getBudget();
+
         navigationView=findViewById(R.id.nav_view);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -82,6 +100,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 }
         );
 
+        buttonExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this,BudgetActivity.class));
+            }
+        });
 
         galleryActivityResultLauncher =registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -137,6 +161,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         requestAllPermission();
 
+    }
+
+    private void getBudget() {
+        budgetModel= new BudgetPreference(Home.this).getBudget();
+        tvTotal.setText(budgetModel.getTotalBudget()+" "+budgetModel.getCurrency());
+        tvRemaining.setText(budgetModel.getRemainingBudget()+" "+budgetModel.getCurrency());
+        tvUsed.setText(budgetModel.getUsedBudget()+"");
+        float usedBudgetProgress=(budgetModel.getUsedBudget()/budgetModel.getTotalBudget())*100;
+        circularProgressBar.setProgress(usedBudgetProgress);
     }
 
     private void requestAllPermission() {
