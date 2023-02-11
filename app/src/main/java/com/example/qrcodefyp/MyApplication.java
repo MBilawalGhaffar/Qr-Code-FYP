@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.qrcodefyp.model.User;
 import com.example.qrcodefyp.preference.UserPreference;
 import com.example.qrcodefyp.util.FirebaseUtil;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MyApplication extends Application {
     @Override
@@ -14,5 +15,6 @@ public class MyApplication extends Application {
         if(!user.getUUID().equals("00000000")){
             FirebaseUtil.USER = new UserPreference(MyApplication.this).getUser();
         }
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 }

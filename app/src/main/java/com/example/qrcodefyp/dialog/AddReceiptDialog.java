@@ -186,6 +186,7 @@ public class AddReceiptDialog extends Dialog {
                 receiptModel.setCategory(category);
                 receiptModel.setPayment(payment);
                 receiptModel.setExpiry_date(expiry);
+                receiptModel.setCurrency("");
 
                 addReceipt(receiptModel);
 

@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <attr name="windowBackground" format="color"/>
+    <attr name="windowBackground" format="color" />
 
     <!-- Base application theme. -->
     <style name="Theme.QrCodeFYP" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
@@ -50,14 +50,24 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
+
     <style name="ReceiptDialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name = "android:windowContentOverlay" >@null</item >
-        <item name = "android:colorBackgroundCacheHint" >@null</item >
-        <item name = "android:backgroundDimEnabled">true</item>
-        <item name = "android:windowBackground" >@android:color/transparent</item >
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
+    <style name="Theme.QrCodeFYP.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.QrCodeFYP.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.QrCodeFYP.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

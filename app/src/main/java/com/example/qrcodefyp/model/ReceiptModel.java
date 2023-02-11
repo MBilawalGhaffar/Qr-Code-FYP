@@ -8,8 +8,9 @@ public class ReceiptModel {
     private String payment;
     private String expiry_date;
     private String image_url;
+    private String currency;
 
-    public ReceiptModel(String id, String total_bill, String description, String category, String payment, String expiry_date, String image_url) {
+    public ReceiptModel(String id, String total_bill, String description, String category, String payment, String expiry_date, String image_url, String currency) {
         this.id=id;
         this.total_bill = total_bill;
         this.description = description;
@@ -17,9 +18,18 @@ public class ReceiptModel {
         this.payment = payment;
         this.expiry_date = expiry_date;
         this.image_url = image_url;
+        this.currency=currency;
     }
 
     public ReceiptModel() {
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public String getId() {

@@ -21,6 +21,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -63,7 +64,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
-    private MaterialCardView buttonAddReceipt,buttonExpense;
+    private MaterialCardView buttonAddReceipt,buttonExpense,buttonMyReceipt;
 
     private BudgetModel budgetModel;
     private TextView tvTotal,tvUsed,tvRemaining;
@@ -79,11 +80,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         circularProgressBar=findViewById(R.id.progress_bar);
         buttonAddReceipt=findViewById(R.id.button_add);
         buttonExpense=findViewById(R.id.button_expense);
+        buttonMyReceipt=findViewById(R.id.button_receipt);
         tvTotal=findViewById(R.id.tv_total_sar);
         tvUsed=findViewById(R.id.tv_used_sar);
         tvRemaining=findViewById(R.id.tv_left_sar);
-
-
+        Log.d("BUDGET", "*******************************getBudget***************************");
         getBudget();
 
         navigationView=findViewById(R.id.nav_view);
@@ -95,10 +96,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        buttonAddReceipt.setOnClickListener(view ->{
+        buttonAddReceipt.setOnClickListener(view -> {
                     addReceiptDialog();
-                }
-        );
+        });
+
+        buttonMyReceipt.setOnClickListener(view -> {
+            startActivity(new Intent(Home.this,MyReceiptActivity.class));
+        });
 
         buttonExpense.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,10 +169,20 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     private void getBudget() {
         budgetModel= new BudgetPreference(Home.this).getBudget();
-        tvTotal.setText(budgetModel.getTotalBudget()+" "+budgetModel.getCurrency());
-        tvRemaining.setText(budgetModel.getRemainingBudget()+" "+budgetModel.getCurrency());
-        tvUsed.setText(budgetModel.getUsedBudget()+"");
-        float usedBudgetProgress=(budgetModel.getUsedBudget()/budgetModel.getTotalBudget())*100;
+        float total=budgetModel.getTotalBudget();
+        float used=budgetModel.getUsedBudget();
+        float remain=budgetModel.getRemainingBudget();
+        tvTotal.setText((int)total+" "+budgetModel.getCurrency());
+        tvRemaining.setText((int)remain+" "+budgetModel.getCurrency());
+        tvUsed.setText((int)used+"");
+
+        Log.d("BUDGET", "total ->"+total);
+        Log.d("BUDGET", "used ->"+used);
+        Log.d("BUDGET", "remain ->"+remain);
+
+        float value=used/total;
+        Log.d("BUDGET", "value ->"+value);
+        float usedBudgetProgress=value*100;
         circularProgressBar.setProgress(usedBudgetProgress);
     }
 
