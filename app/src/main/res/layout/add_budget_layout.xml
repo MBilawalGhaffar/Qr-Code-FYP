@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_16sdp"
+   >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:id="@+id/button_cancel_dialog"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/cancel_dialog_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/forget_text"
+            android:textColor="@color/colorPrimaryVariant"
+            android:textSize="@dimen/_25sdp"
+            android:textStyle="bold"
+            android:text="Add New Budget"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/et_sar_amount"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="Total Budget"
+            app:expandedHintEnabled="false"
+            app:placeholderText="100"
+
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_total_budget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ti_currency"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="Currency"
+            app:expandedHintEnabled="false"
+            app:placeholderText="SAR"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:orientation="horizontal"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/currency_dropdown"
+                android:layout_width="match_parent"
+                android:focusable="false"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:id="@+id/button_add_budget"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            app:cornerRadius="@dimen/_16sdp"
+            android:text="Add Budget"
+            android:textAllCaps="true"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            app:elevation="@dimen/_20sdp" />
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

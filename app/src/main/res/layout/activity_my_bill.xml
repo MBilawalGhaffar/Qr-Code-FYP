@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MyBillActivity">
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:id="@+id/rec_bills"/>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/button_add"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="@dimen/_12sdp"
+        app:cardElevation="@dimen/_8sdp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_12sdp"
+            android:src="@drawable/fab_add_icon" />
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

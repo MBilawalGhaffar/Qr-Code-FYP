@@ -6,6 +6,7 @@ import static com.example.qrcodefyp.util.FirebaseUtil.DB_RECEIPT_REF;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -32,7 +33,10 @@ import com.example.qrcodefyp.activity.QrCodeScannerActivity;
 import com.example.qrcodefyp.activity.SigUpActivity;
 import com.example.qrcodefyp.callback.OnImagePicked;
 import com.example.qrcodefyp.callback.OnImagePicker;
+import com.example.qrcodefyp.model.BudgetModel;
 import com.example.qrcodefyp.model.ReceiptModel;
+import com.example.qrcodefyp.preference.BudgetPreference;
+import com.example.qrcodefyp.util.FirebaseUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,7 +47,9 @@ import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -83,10 +89,15 @@ public class AddReceiptDialog extends Dialog {
 
     private Uri imageUri;
     private TextInputEditText etTotalBill,etDescription;
+    private TextInputLayout currencyHint;
     private AutoCompleteTextView categoryDropdown;
     Dialog dialog;
     private StorageReference storageReference;
     private FirebaseUser user;
+    private String mCurrency="";
+    private int mTotalBudget=0,mRemainingBudget=0,mUsedBudget=0;
+
+
     public interface ReturnCallback {
         void returnCall(Boolean permission);
     }
@@ -103,11 +114,12 @@ public class AddReceiptDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_receipt_layout);
         Activity activity = (Activity) mHome;
-
+        currencyHint=findViewById(R.id.et_sar_amount);
+        getBudget();
         storageReference= FirebaseStorage.getInstance().getReference();
-
         etTotalBill=findViewById(R.id.et_total_bill);
         etDescription=findViewById(R.id.et_description);
+
 
 
         buttonScan=findViewById(R.id.button_scan);
@@ -180,18 +192,36 @@ public class AddReceiptDialog extends Dialog {
                     Toast.makeText(mHome,"Please select image first",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                int todayBill=Integer.parseInt(totalBill);
+
+                if(mRemainingBudget<todayBill){
+                    dialog.dismiss();
+                    MaterialAlertDialogBuilder alertDialogBuilder=new MaterialAlertDialogBuilder(mHome);
+                    alertDialogBuilder.setTitle("Budget Alert!");
+                    alertDialogBuilder.setMessage("Your monthly limit exceeded,Please reset your monthly limit.");
+                    alertDialogBuilder.setCancelable(true);
+                    alertDialogBuilder.setPositiveButton("Ok", new OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialogBuilder.show();
+                    return;
+                }
+                mUsedBudget=mUsedBudget+todayBill;
+                mRemainingBudget=mRemainingBudget-todayBill;
+                BudgetModel budgetModel=new BudgetModel(mTotalBudget,mUsedBudget,mRemainingBudget,mCurrency);
+                new BudgetPreference(mHome).addBudget(budgetModel);
+                FirebaseDatabase.getInstance().getReference(FirebaseUtil.DB_BUDGET_REF).child(user.getUid()).setValue(budgetModel);
                 ReceiptModel receiptModel=new ReceiptModel();
                 receiptModel.setTotal_bill(totalBill);
                 receiptModel.setDescription(description);
                 receiptModel.setCategory(category);
                 receiptModel.setPayment(payment);
                 receiptModel.setExpiry_date(expiry);
-                receiptModel.setCurrency("");
-
+                receiptModel.setCurrency(mCurrency);
                 addReceipt(receiptModel);
-
-
-
 
             }
         });
@@ -286,6 +316,16 @@ public class AddReceiptDialog extends Dialog {
         });
 
     }
+
+    private void getBudget() {
+        BudgetModel budgetModel=new BudgetPreference(mHome).getBudget();
+        currencyHint.setPlaceholderText(budgetModel.getCurrency());
+        mCurrency=budgetModel.getCurrency();
+        mTotalBudget=budgetModel.getTotalBudget();
+        mUsedBudget=budgetModel.getUsedBudget();
+        mRemainingBudget=budgetModel.getRemainingBudget();
+    }
+
     public static String getRandomNumberString() {
         // It will generate 6 digit random Number.
         // from 0 to 999999

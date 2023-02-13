@@ -40,9 +40,14 @@ import com.example.qrcodefyp.model.UserAuth;
 import com.example.qrcodefyp.preference.AuthPreference;
 import com.example.qrcodefyp.preference.BudgetPreference;
 import com.example.qrcodefyp.preference.UserPreference;
+import com.example.qrcodefyp.util.FirebaseUtil;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -64,11 +69,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
-    private MaterialCardView buttonAddReceipt,buttonExpense,buttonMyReceipt;
+    private MaterialCardView buttonAddReceipt,buttonExpense,buttonMyReceipt,buttonMyBill;
 
     private BudgetModel budgetModel;
     private TextView tvTotal,tvUsed,tvRemaining;
     private CircularProgressBar circularProgressBar;
+    private FirebaseDatabase firebaseDatabase;
 
 
     @Override
@@ -81,6 +87,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         buttonAddReceipt=findViewById(R.id.button_add);
         buttonExpense=findViewById(R.id.button_expense);
         buttonMyReceipt=findViewById(R.id.button_receipt);
+        buttonMyBill=findViewById(R.id.button_bill);
         tvTotal=findViewById(R.id.tv_total_sar);
         tvUsed=findViewById(R.id.tv_used_sar);
         tvRemaining=findViewById(R.id.tv_left_sar);
@@ -108,6 +115,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Home.this,BudgetActivity.class));
+            }
+        });
+
+        buttonMyBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this,MyBillActivity.class));
             }
         });
 
@@ -164,7 +178,36 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 });
 
         requestAllPermission();
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        getBudgetFromDb();
 
+    }
+
+    private void getBudgetFromDb() {
+        firebaseDatabase.getReference(FirebaseUtil.DB_BUDGET_REF).child(user.getUUID()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    BudgetModel dbBudget=snapshot.getValue(BudgetModel.class);
+                    assert dbBudget != null;
+                    if(dbBudget.getUsedBudget()>budgetModel.getUsedBudget()){
+                        new BudgetPreference(Home.this).addBudget(dbBudget);
+                        getBudget();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getBudget();
     }
 
     private void getBudget() {
@@ -181,8 +224,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         Log.d("BUDGET", "remain ->"+remain);
 
         float value=used/total;
+        if (Double.isNaN(value)){
+            value=0;
+        }
         Log.d("BUDGET", "value ->"+value);
         float usedBudgetProgress=value*100;
+        Log.d("BUDGET", "usedBudgetProgress ->"+usedBudgetProgress);
         circularProgressBar.setProgress(usedBudgetProgress);
     }
 

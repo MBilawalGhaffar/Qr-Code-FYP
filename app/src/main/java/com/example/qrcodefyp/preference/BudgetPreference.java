@@ -13,9 +13,9 @@ public class BudgetPreference {
         sharedPreferences=context.getSharedPreferences("BUDGET",Context.MODE_PRIVATE);
     }
     public BudgetModel getBudget() {
-        int totalBudget=sharedPreferences.getInt("totalBudget",100);
-        int usedBudget=sharedPreferences.getInt("usedBudget",20);
-        int remainingBudget=sharedPreferences.getInt("remainingBudget",80);
+        int totalBudget=sharedPreferences.getInt("totalBudget",0);
+        int usedBudget=sharedPreferences.getInt("usedBudget",0);
+        int remainingBudget=sharedPreferences.getInt("remainingBudget",0);
         String currency=sharedPreferences.getString("currency","SAR");
         return new BudgetModel(totalBudget,usedBudget,remainingBudget,currency);
 
