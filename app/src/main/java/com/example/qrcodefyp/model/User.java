@@ -11,6 +11,9 @@ public class User {
         Email = email;
     }
 
+    public User() {
+    }
+
     public String getUUID() {
         return UUID;
     }

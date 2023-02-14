@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -20,10 +21,20 @@
         android:theme="@style/Theme.QrCodeFYP"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ProfileActivity"
+            android:exported="false"
+            android:label="Profile"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.MyBillActivity"
             android:exported="false"
             android:label="My Bills"
-            android:screenOrientation="portrait">>
+            android:screenOrientation="portrait">
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -105,6 +116,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+        <receiver android:name=".util.NotificationReceiver"/>
     </application>
 
 </manifest>

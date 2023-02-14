@@ -15,7 +15,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -41,6 +44,7 @@ import com.example.qrcodefyp.preference.AuthPreference;
 import com.example.qrcodefyp.preference.BudgetPreference;
 import com.example.qrcodefyp.preference.UserPreference;
 import com.example.qrcodefyp.util.FirebaseUtil;
+import com.example.qrcodefyp.util.NotificationReceiver;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,6 +60,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int ALL_PERMISSION_CODE = 101;
@@ -69,14 +74,16 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
-    private MaterialCardView buttonAddReceipt,buttonExpense,buttonMyReceipt,buttonMyBill;
+    private MaterialCardView buttonAddReceipt,buttonExpense,buttonMyReceipt,buttonMyBill,buttonProfile;
 
     private BudgetModel budgetModel;
     private TextView tvTotal,tvUsed,tvRemaining;
     private CircularProgressBar circularProgressBar;
     private FirebaseDatabase firebaseDatabase;
 
-
+    AlarmManager alarmManager;
+    PendingIntent broadcast;
+    Intent notificationIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +95,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         buttonExpense=findViewById(R.id.button_expense);
         buttonMyReceipt=findViewById(R.id.button_receipt);
         buttonMyBill=findViewById(R.id.button_bill);
+        buttonProfile=findViewById(R.id.button_profile);
         tvTotal=findViewById(R.id.tv_total_sar);
         tvUsed=findViewById(R.id.tv_used_sar);
         tvRemaining=findViewById(R.id.tv_left_sar);
@@ -109,6 +117,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         buttonMyReceipt.setOnClickListener(view -> {
             startActivity(new Intent(Home.this,MyReceiptActivity.class));
+        });
+
+        buttonProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this,ProfileActivity.class));
+            }
         });
 
         buttonExpense.setOnClickListener(new View.OnClickListener() {
@@ -180,6 +195,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         requestAllPermission();
         firebaseDatabase=FirebaseDatabase.getInstance();
         getBudgetFromDb();
+        Notification(1,"A","a",2);
+        Notification(2,"B","b",4);
+        Notification(3,"C","c",6);
 
     }
 
@@ -313,6 +331,37 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             return;
         }
         super.onBackPressed();
+    }
+    private void Notification(int id_todo,String heading_todo,String message_todo,int time) {
+        Log.i("NOTIFICATION", " CREATED");
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        notificationIntent = new Intent(Home.this, NotificationReceiver.class);
+        notificationIntent.putExtra("ID", id_todo);
+        notificationIntent.putExtra("Title", heading_todo);
+        notificationIntent.putExtra("Message", message_todo);
+        notificationIntent.putExtra("SwitchChecked", 1);
+        try {
+            broadcast = PendingIntent.getBroadcast(Home.this, id_todo, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }catch (Exception e){
+            broadcast = PendingIntent.getBroadcast(Home.this, id_todo, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+        }
+//        broadcast = PendingIntent.getBroadcast(mHome, id_todo, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH, 15);
+        cal.set(Calendar.MONTH, 1);
+        cal.set(Calendar.YEAR, 2023);
+        cal.set(Calendar.HOUR_OF_DAY, 1);
+        cal.set(Calendar.MINUTE, 0+time);
+        cal.set(Calendar.SECOND, 0);
+        Log.i("NOTIFICATION   ", "***************************");
+
+        long timeInMilli= Calendar.getInstance().get(Calendar.MILLISECOND);
+        Log.i("NOTIFICATION   ","timeInMilli "+timeInMilli );
+        timeInMilli=timeInMilli+time;
+        Log.i("NOTIFICATION   ","timeInMilli "+timeInMilli );
+
+        alarmManager.setExact(AlarmManager.RTC, cal.getTimeInMillis(), broadcast);
     }
 
     @Override

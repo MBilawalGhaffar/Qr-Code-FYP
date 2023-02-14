@@ -5,13 +5,17 @@ import static com.example.qrcodefyp.util.FirebaseUtil.DB_RECEIPT_REF;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -37,6 +41,7 @@ import com.example.qrcodefyp.model.BudgetModel;
 import com.example.qrcodefyp.model.ReceiptModel;
 import com.example.qrcodefyp.preference.BudgetPreference;
 import com.example.qrcodefyp.util.FirebaseUtil;
+import com.example.qrcodefyp.util.NotificationReceiver;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -97,6 +102,21 @@ public class AddReceiptDialog extends Dialog {
     private String mCurrency="";
     private int mTotalBudget=0,mRemainingBudget=0,mUsedBudget=0;
 
+
+    AlarmManager alarmManager;
+    PendingIntent broadcast;
+    Intent notificationIntent;
+    int MONTH;
+    int DAY;
+    int YEAR;
+    int HOUR;
+    int MINUTE;
+    String heading_todo;
+    String message_todo;
+    String date_todo;
+    String time_todo;
+    int id_todo;
+    int notification_todo;
 
     public interface ReturnCallback {
         void returnCall(Boolean permission);
@@ -316,6 +336,34 @@ public class AddReceiptDialog extends Dialog {
         });
 
     }
+    private void Notification() {
+        Log.i("NOTIFICATION", " CREATED");
+        alarmManager = (AlarmManager) mHome.getSystemService(Context.ALARM_SERVICE);
+        notificationIntent = new Intent(mHome, NotificationReceiver.class);
+        notificationIntent.putExtra("ID", id_todo);
+        notificationIntent.putExtra("Title", heading_todo);
+        notificationIntent.putExtra("Message", message_todo);
+        notificationIntent.putExtra("SwitchChecked", true);
+        try {
+            broadcast = PendingIntent.getBroadcast(mHome, id_todo, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }catch (Exception e){
+            broadcast = PendingIntent.getBroadcast(mHome, id_todo, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+        }
+//        broadcast = PendingIntent.getBroadcast(mHome, id_todo, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(Calendar.DAY_OF_MONTH, DAY);
+//        cal.set(Calendar.MONTH, MONTH - 1);
+//        cal.set(Calendar.YEAR, YEAR);
+//        cal.set(Calendar.HOUR_OF_DAY, HOUR);
+//        cal.set(Calendar.MINUTE, MINUTE);
+//        cal.set(Calendar.SECOND, 0);
+
+        long timeInMilli=Calendar.getInstance().get(Calendar.MILLISECOND);
+        timeInMilli=timeInMilli+100000;
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilli, broadcast);
+    }
 
     private void getBudget() {
         BudgetModel budgetModel=new BudgetPreference(mHome).getBudget();
@@ -340,7 +388,8 @@ public class AddReceiptDialog extends Dialog {
         String id=getRandomNumberString();
         receiptModel.setId(id);
         StorageReference ref=storageReference.child("IMAGE/"+id);
-        ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        ref.putFile(imageUri).
+                addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 if(taskSnapshot.getTask().isSuccessful()){
@@ -385,7 +434,8 @@ public class AddReceiptDialog extends Dialog {
                 }
 
             }
-        }).addOnFailureListener(new OnFailureListener() {
+        })
+                .addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 dialog.dismiss();
