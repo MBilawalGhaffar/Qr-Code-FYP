@@ -19,6 +19,6 @@
     <color name="black_transparent">#2C000000</color>
     <color name="black_transparent2">#5E000000</color>
     <color name="black_transparent3">#40000000</color>
-
+    <color name="dark_red">#B00020</color>
 <!--    <color name="window_background">#F5F5F5</color>-->
 </resources>

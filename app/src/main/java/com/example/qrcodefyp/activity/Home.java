@@ -74,7 +74,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
-    private MaterialCardView buttonAddReceipt,buttonExpense,buttonMyReceipt,buttonMyBill,buttonProfile;
+    private MaterialCardView buttonAddReceipt,buttonExpense,buttonMyReceipt,buttonMyBill,buttonProfile,buttonCurrency;
 
     private BudgetModel budgetModel;
     private TextView tvTotal,tvUsed,tvRemaining;
@@ -96,6 +96,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         buttonMyReceipt=findViewById(R.id.button_receipt);
         buttonMyBill=findViewById(R.id.button_bill);
         buttonProfile=findViewById(R.id.button_profile);
+        buttonCurrency=findViewById(R.id.button_converter);
         tvTotal=findViewById(R.id.tv_total_sar);
         tvUsed=findViewById(R.id.tv_used_sar);
         tvRemaining=findViewById(R.id.tv_left_sar);
@@ -137,6 +138,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Home.this,MyBillActivity.class));
+            }
+        });
+        buttonCurrency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this,CurrencyConverterActivity.class));
             }
         });
 

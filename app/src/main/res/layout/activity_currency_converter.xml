@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_10sdp"
+    android:id="@+id/mainLayout"
+    tools:context=".activity.CurrencyConverterActivity">
+
+    <EditText
+        android:id="@+id/et_first_currency"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="#F1F1F1"
+        android:hint="Input amount"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="0dp"
+        app:layout_constraintEnd_toStartOf="@+id/txt_first_currency"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor,RtlCompat" />
+
+    <TextView
+        android:id="@+id/txt_first_currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USD"
+        app:layout_constraintBottom_toBottomOf="@+id/et_first_currency"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_first_currency" />
+
+    <EditText
+        android:id="@+id/et_second_currency"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="20dp"
+        android:background="#F1F1F1"
+        android:hint="Converted amount"
+        android:enabled="false"
+        android:importantForAutofill="no"
+        android:inputType="none"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/et_first_currency"
+        app:layout_constraintStart_toStartOf="@+id/et_first_currency"
+        app:layout_constraintTop_toBottomOf="@+id/et_first_currency"
+        tools:ignore="LabelFor,RtlCompat" />
+
+    <TextView
+        android:id="@+id/txt_second_currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PKR"
+        app:layout_constraintBottom_toBottomOf="@+id/et_second_currency"
+        app:layout_constraintEnd_toEndOf="@+id/txt_first_currency"
+        app:layout_constraintTop_toTopOf="@+id/et_second_currency" />
+
+
+    <com.hbb20.CountryPickerView
+        android:id="@+id/first_countryPicker"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        app:cp_initialSelectionMode="specificCountry"
+        app:cp_initialSpecificCountry="US"
+        app:layout_constraintEnd_toStartOf="@+id/second_countryPicker"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_second_currency" />
+
+    <com.hbb20.CountryPickerView
+        android:id="@+id/second_countryPicker"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:cp_initialSelectionMode="specificCountry"
+        app:cp_initialSpecificCountry="PK"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/first_countryPicker"
+        app:layout_constraintTop_toTopOf="@+id/first_countryPicker" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnConvert"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="60dp"
+        android:text="Convert"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/second_countryPicker"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/first_countryPicker"
+        app:layout_constraintTop_toBottomOf="@+id/first_countryPicker"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ProgressBar
+        android:id="@+id/prgLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnConvert"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

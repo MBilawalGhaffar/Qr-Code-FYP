@@ -21,6 +21,15 @@
         android:theme="@style/Theme.QrCodeFYP"
         tools:targetApi="31">
         <activity
+            android:name=".activity.CurrencyConverterActivity"
+            android:exported="false"
+            android:label="Currency Converter"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.ProfileActivity"
             android:exported="false"
             android:label="Profile"
@@ -116,7 +125,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-        <receiver android:name=".util.NotificationReceiver"/>
+
+        <receiver android:name=".util.NotificationReceiver" />
     </application>
 
 </manifest>
