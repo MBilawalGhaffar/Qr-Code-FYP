@@ -3,6 +3,7 @@
     <string name="splash_text">Splash</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="my_link">https://api.getgeoapi.com/v2/currency/convert?api_key=70a7cae2c26c8df0defbef9bf91e00f205f0aa4a&amp;from=EUR&amp;to=GBP&amp;amount=10&amp;format=json</string>
     <string name="cam_image_file_name">camImageFile.jpg</string>
     <string name="title_activity_my_receipt">My Receipts</string>
     <!-- Strings used for fragments for navigation -->

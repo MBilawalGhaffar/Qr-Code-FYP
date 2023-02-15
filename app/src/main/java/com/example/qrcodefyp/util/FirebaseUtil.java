@@ -6,6 +6,7 @@ public class FirebaseUtil {
     public static User USER = null;
     public static String DB_LOGIN_REF ="USERS";
     public static String DB_RECEIPT_REF ="RECEIPTS";
+    public static String DB_SHOP_REF ="SHOPS";
     public static String DB_BUDGET_REF ="BUDGETS";
     public static String DB_BILL_REF ="BILLS";
     public static String DB_PROFILE_REF ="PROFILES";

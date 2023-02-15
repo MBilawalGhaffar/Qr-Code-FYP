@@ -74,7 +74,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
-    private MaterialCardView buttonAddReceipt,buttonExpense,buttonMyReceipt,buttonMyBill,buttonProfile,buttonCurrency;
+    private MaterialCardView buttonAddReceipt,buttonExpense,buttonMyReceipt,buttonMyBill,buttonProfile,buttonCurrency,buttonShop;
 
     private BudgetModel budgetModel;
     private TextView tvTotal,tvUsed,tvRemaining;
@@ -92,6 +92,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         drawerLayout = findViewById(R.id.my_drawer_layout);
         circularProgressBar=findViewById(R.id.progress_bar);
         buttonAddReceipt=findViewById(R.id.button_add);
+        buttonShop=findViewById(R.id.button_shop);
         buttonExpense=findViewById(R.id.button_expense);
         buttonMyReceipt=findViewById(R.id.button_receipt);
         buttonMyBill=findViewById(R.id.button_bill);
@@ -131,6 +132,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Home.this,BudgetActivity.class));
+            }
+        });
+
+        buttonShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this,ShopsActivity.class));
             }
         });
 
@@ -202,9 +210,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         requestAllPermission();
         firebaseDatabase=FirebaseDatabase.getInstance();
         getBudgetFromDb();
-        Notification(1,"A","a",2);
-        Notification(2,"B","b",4);
-        Notification(3,"C","c",6);
+//        Notification(1,"A","a",2);
+//        Notification(2,"B","b",4);
+//        Notification(3,"C","c",6);
 
     }
 

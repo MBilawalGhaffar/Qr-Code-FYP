@@ -35,22 +35,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/et_first_currency" />
 
-    <EditText
+    <TextView
         android:id="@+id/et_second_currency"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
         android:background="#F1F1F1"
-        android:hint="Converted amount"
-        android:enabled="false"
-        android:importantForAutofill="no"
-        android:inputType="none"
+        android:textSize="@dimen/_14sdp"
+        android:textColor="@color/black"
+        android:text="Converted amount"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="0dp"
         app:layout_constraintEnd_toEndOf="@+id/et_first_currency"
         app:layout_constraintStart_toStartOf="@+id/et_first_currency"
         app:layout_constraintTop_toBottomOf="@+id/et_first_currency"
-        tools:ignore="LabelFor,RtlCompat" />
+        />
 
     <TextView
         android:id="@+id/txt_second_currency"

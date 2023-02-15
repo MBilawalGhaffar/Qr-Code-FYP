@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.webkit.DownloadListener
 import android.webkit.WebView
@@ -95,8 +96,12 @@ class QrCodeScannerActivity : AppCompatActivity() {
         codeScanner.isFlashEnabled = false // Whether to enable flash or not
 
         // Callbacks
-        codeScanner.decodeCallback = DecodeCallback {
+        codeScanner.decodeCallback = DecodeCallback { it ->
             runOnUiThread {
+                Log.e("QRCODE","it.text ******"+it.text)
+                Log.e("QRCODE","it.barcodeFormat ******"+it.barcodeFormat)
+                Log.e("QRCODE","it.resultMetadata ******"+it.resultMetadata)
+                Log.e("QRCODE","it.numBits ******"+it.numBits)
 //                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
                 val intent = Intent()
                     .putExtra("SCAN_RESULT", it.text)
@@ -106,6 +111,8 @@ class QrCodeScannerActivity : AppCompatActivity() {
                 webView.loadUrl(it.text)
                 Handler(Looper.myLooper()!!).postDelayed({
                     val  webViewHitTestResult = webView.hitTestResult
+                    Log.e("QRCODE","webViewHitTestResult")
+                    Log.e("QRCODE","getType   "+webViewHitTestResult.type)
                     if (webViewHitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE ||
                         webViewHitTestResult.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE){
                         Toast.makeText(this,"Image true",Toast.LENGTH_SHORT).show()

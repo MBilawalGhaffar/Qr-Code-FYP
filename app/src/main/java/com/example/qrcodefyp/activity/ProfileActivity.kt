@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.view.Window
 import android.widget.Toast
@@ -44,6 +45,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         dialog = Dialog(this)
         dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog!!.setContentView(R.layout.dialog_wait1)
@@ -145,5 +147,10 @@ class ProfileActivity : AppCompatActivity() {
                 Toast.makeText(this@ProfileActivity,"error, ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        onBackPressed()
+        return super.onOptionsItemSelected(item)
+
     }
 }
