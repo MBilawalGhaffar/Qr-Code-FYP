@@ -30,7 +30,7 @@ class ShopsAdapter(context: Context, function: () -> Unit): RecyclerView.Adapter
     override fun onBindViewHolder(holder: ReceiptViewHolder, position: Int) {
         val shopModel =myReceiptsList[position]
         holder.name.text=shopModel.name
-        holder.discount.text=shopModel.discount+" %"
+        holder.discount.text=shopModel.discount
     }
 
     override fun getItemCount(): Int {

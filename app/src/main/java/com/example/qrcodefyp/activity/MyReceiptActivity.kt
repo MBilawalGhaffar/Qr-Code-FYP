@@ -15,6 +15,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MyReceiptActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyReceiptBinding
@@ -22,6 +24,8 @@ class MyReceiptActivity : AppCompatActivity() {
     private lateinit var receiptRecyclerView: RecyclerView
     private var list:MutableList<ReceiptModel> =ArrayList()
     private var mDatabase: FirebaseDatabase? = null
+    private val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyReceiptBinding.inflate(layoutInflater)
@@ -38,8 +42,23 @@ class MyReceiptActivity : AppCompatActivity() {
         receiptRecyclerView.setHasFixedSize(true)
         receiptRecyclerView.adapter=receiptsAdapter
 
+        val date="01/03/2023"
+        val nowDate = sdf.format(Date())
+        Log.d("SPLIT","date $date")
+        Log.d("SPLIT","nowDate $nowDate")
 
+        val aSplit = nowDate.split('/')
+        val day=aSplit[0].toInt()
+        val month=aSplit[1].toInt()
+        val year=aSplit[2].toInt()
+        Log.d("SPLIT","aSplit $aSplit")
 
+        Log.d("SPLIT","bSplit ${aSplit[0]}")
+        Log.d("SPLIT","bSplit ${aSplit[1]}")
+        Log.d("SPLIT","bSplit ${aSplit[2]}")
+        Log.d("SPLIT","day $day")
+        Log.d("SPLIT","month $month")
+        Log.d("SPLIT","year $year")
 
     }
 
@@ -49,7 +68,7 @@ class MyReceiptActivity : AppCompatActivity() {
                 if(snapshot.exists()){
                     Log.e("Receipts","snapshot -> exist")
                     Log.e("Receipts","snapshot -> "+snapshot.value)
-
+                    list.clear()
                     for (snapshot in snapshot.children) {
                         val receiptModel: ReceiptModel = snapshot.getValue(ReceiptModel::class.java)!!
                         Log.e("Receipts","*****************snapshot**************")
@@ -61,6 +80,26 @@ class MyReceiptActivity : AppCompatActivity() {
                         list.add(receiptModel)
                     }
                     receiptsAdapter.setList(list)
+//                    for (item in list){
+//
+//                        val date=item.expiry_date
+//                        val aSplit = date.split('/')
+//                        val day=aSplit[0].toInt()
+//                        val month=aSplit[1].toInt()
+//                        val year=aSplit[2].toInt()
+//
+//                        val nowDate = sdf.format(Date())
+//                        val bSplit = nowDate.split('/')
+//                        val tDay=bSplit[0].toInt()
+//                        val tMonth=bSplit[1].toInt()
+//                        val tYear=bSplit[2].toInt()
+//                        if(tDay > day && tMonth>=month ){
+//                            //delete
+//                            mDatabase!!.getReference(FirebaseUtil.DB_RECEIPT_REF).child(FirebaseUtil.USER.uuid).child(item.id).removeValue()
+//                        }
+//                    }
+
+
                 }else{
                     Log.e("Receipts","snapshot -> don't exist")
                     Toast.makeText(this@MyReceiptActivity,"User have no record yet!",Toast.LENGTH_SHORT).show()

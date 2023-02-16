@@ -10,7 +10,7 @@
     <color name="colorPrimary">#2C9270</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="window_background">#FFFFFFFF</color>
+    <color name="window_background">#F5F5F5</color>
     <color name="progress_background">#BDE9DA</color>
     <color name="color_gradient_1">#163128</color>
     <color name="color_gradient_2">#0DA371</color>
