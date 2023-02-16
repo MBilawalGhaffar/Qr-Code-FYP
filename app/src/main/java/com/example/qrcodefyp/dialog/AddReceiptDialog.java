@@ -256,6 +256,24 @@ public class AddReceiptDialog extends Dialog {
         buttonScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                onImagePicker.onImageScan(new OnImagePicked() {
+                    @Override
+                    public void onImagePicked(@Nullable Uri uri, @Nullable Bitmap bitmap) {
+                        if(uri!=null||bitmap!=null){
+                            imageUri=uri;
+                            imagePickLt.setVisibility(View.GONE);
+                            imagePickedLt.setVisibility(View.VISIBLE);
+                            pickedImage.setImageBitmap(bitmap);
+                            isImageSelected=true;
+                        }else {
+                            imagePickLt.setVisibility(View.VISIBLE);
+                            imagePickedLt.setVisibility(View.GONE);
+                            isImageSelected=false;
+                        }
+                    }
+                },true);
+
                 ((Activity) mHome).startActivityForResult(new Intent(mHome, QrCodeScannerActivity.class),101);
             }
         });
@@ -336,6 +354,7 @@ public class AddReceiptDialog extends Dialog {
         });
 
     }
+
     private void Notification() {
         Log.i("NOTIFICATION", " CREATED");
         alarmManager = (AlarmManager) mHome.getSystemService(Context.ALARM_SERVICE);

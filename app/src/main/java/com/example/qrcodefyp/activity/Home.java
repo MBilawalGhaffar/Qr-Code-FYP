@@ -45,6 +45,7 @@ import com.example.qrcodefyp.preference.BudgetPreference;
 import com.example.qrcodefyp.preference.UserPreference;
 import com.example.qrcodefyp.util.FirebaseUtil;
 import com.example.qrcodefyp.util.NotificationReceiver;
+import com.example.qrcodefyp.util.ScanUtil;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -74,7 +75,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
-    private MaterialCardView buttonAddReceipt,buttonExpense,buttonMyReceipt,buttonMyBill,buttonProfile,buttonCurrency,buttonShop;
+    private MaterialCardView buttonAddReceipt,buttonExpense,buttonMyReceipt,buttonMyBill,buttonProfile,buttonCurrency,buttonShop,buttonAbout;
 
     private BudgetModel budgetModel;
     private TextView tvTotal,tvUsed,tvRemaining;
@@ -98,6 +99,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         buttonMyBill=findViewById(R.id.button_bill);
         buttonProfile=findViewById(R.id.button_profile);
         buttonCurrency=findViewById(R.id.button_converter);
+        buttonAbout=findViewById(R.id.button_about);
         tvTotal=findViewById(R.id.tv_total_sar);
         tvUsed=findViewById(R.id.tv_used_sar);
         tvRemaining=findViewById(R.id.tv_left_sar);
@@ -139,6 +141,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Home.this,ShopsActivity.class));
+            }
+        });
+        buttonAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this,AboutActivity.class));
             }
         });
 
@@ -298,6 +306,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
             }
+
+            @Override
+            public void onImageScan(OnImagePicked callback, Boolean result) {
+                onImagePicked=callback;
+            }
         });
         addReceiptDialog.setCancelable(false);
         addReceiptDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -393,9 +406,22 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     }
                 }catch (Exception e){
                     Toast.makeText(this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                    onImagePicked.onImagePicked(null,null);
+                    if(onImagePicked!=null){
+                        onImagePicked.onImagePicked(null,null);
+                    }
                 }
 
+            }
+        }
+        if(requestCode==101){
+            if(resultCode==RESULT_OK){
+                if(onImagePicked!=null){
+                    onImagePicked.onImagePicked(null, ScanUtil.scanBitmap);
+                }
+            }else {
+                if(onImagePicked!=null){
+                    onImagePicked.onImagePicked(null,null);
+                }
             }
         }
     }

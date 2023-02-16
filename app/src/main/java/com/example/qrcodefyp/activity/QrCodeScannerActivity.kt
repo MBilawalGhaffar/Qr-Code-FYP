@@ -2,28 +2,29 @@ package com.example.qrcodefyp.activity
 
 import android.Manifest
 import android.app.Activity
-import android.app.DownloadManager
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.os.Environment
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
-import android.view.View
-import android.webkit.DownloadListener
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.qrcodefyp.R
+import com.example.qrcodefyp.util.ScanUtil.scanBitmap
 import com.google.zxing.Result
 import com.google.zxing.ResultMetadataType
-import java.net.URL
 
 
 class QrCodeScannerActivity : AppCompatActivity() {
@@ -44,6 +45,7 @@ class QrCodeScannerActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
     private lateinit var codeScanner: CodeScanner
+    private lateinit var myImage:ImageView
 
 
 
@@ -51,6 +53,7 @@ class QrCodeScannerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_code_scanner)
         webView= findViewById(R.id.webView)
+        myImage=findViewById(R.id.myImge)
         webView.getSettings().javaScriptEnabled = true
         webView.webViewClient = WebViewClient()
         requestAllPermission()
@@ -98,29 +101,62 @@ class QrCodeScannerActivity : AppCompatActivity() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback { it ->
             runOnUiThread {
+                val myUrl=it.text
+//                Glide.with(this).load(myUrl).into(myImage)
+
+                Glide.with(this).asBitmap()
+                    .load(myUrl)
+                    .listener(object : RequestListener<Bitmap> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Bitmap?>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            Toast.makeText(this@QrCodeScannerActivity,"Onfail",Toast.LENGTH_SHORT).show()
+                            return false
+                        }
+
+                        override fun onResourceReady(
+                            resource: Bitmap?,
+                            model: Any?,
+                            target: Target<Bitmap?>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            val bitmap=resource
+                            scanBitmap=bitmap
+                            setResult(RESULT_OK)
+                            finish()
+                            Toast.makeText(this@QrCodeScannerActivity,"onResourceReady",Toast.LENGTH_SHORT).show()
+                            return false
+                        }
+                    })
+                    .into(myImage)
+
                 Log.e("QRCODE","it.text ******"+it.text)
                 Log.e("QRCODE","it.barcodeFormat ******"+it.barcodeFormat)
                 Log.e("QRCODE","it.resultMetadata ******"+it.resultMetadata)
                 Log.e("QRCODE","it.numBits ******"+it.numBits)
 //                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
-                val intent = Intent()
-                    .putExtra("SCAN_RESULT", it.text)
-                    .putExtra("SCAN_RESULT_FORMAT", it.barcodeFormat.toString())
-                val path = intent.getStringExtra("SCAN_RESULT_IMAGE_PATH")
-                val url = URL(it.text)
-                webView.loadUrl(it.text)
-                Handler(Looper.myLooper()!!).postDelayed({
-                    val  webViewHitTestResult = webView.hitTestResult
-                    Log.e("QRCODE","webViewHitTestResult")
-                    Log.e("QRCODE","getType   "+webViewHitTestResult.type)
-                    if (webViewHitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE ||
-                        webViewHitTestResult.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE){
-                        Toast.makeText(this,"Image true",Toast.LENGTH_SHORT).show()
-                    }else{
-                        Toast.makeText(this,"Image false",Toast.LENGTH_SHORT).show()
-                    }
-                },2000)
-                webView.visibility= View.VISIBLE
+//                val intent = Intent()
+//                    .putExtra("SCAN_RESULT", it.text)
+//                    .putExtra("SCAN_RESULT_FORMAT", it.barcodeFormat.toString())
+//                val path = intent.getStringExtra("SCAN_RESULT_IMAGE_PATH")
+//                val url = URL(it.text)
+//                webView.loadUrl(it.text)
+//                Handler(Looper.myLooper()!!).postDelayed({
+//                    val  webViewHitTestResult = webView.hitTestResult
+//                    Log.e("QRCODE","webViewHitTestResult")
+//                    Log.e("QRCODE","getType   "+webViewHitTestResult.type)
+//                    if (webViewHitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE ||
+//                        webViewHitTestResult.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE){
+//                        Toast.makeText(this,"Image true",Toast.LENGTH_SHORT).show()
+//                    }else{
+//                        Toast.makeText(this,"Image false",Toast.LENGTH_SHORT).show()
+//                    }
+//                },2000)
+//                webView.visibility= View.VISIBLE
 
 //                webView.setDownloadListener(DownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
 //                    val request = DownloadManager.Request(Uri.parse(url))

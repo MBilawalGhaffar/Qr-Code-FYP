@@ -326,7 +326,7 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:id="@+id/button_setting"
+                        android:id="@+id/button_about"
                         android:clickable="true"
                         android:focusable="true"
                         android:layout_margin="@dimen/_6sdp"
@@ -343,7 +343,7 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="80"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/my_setting_icon"
+                                android:src="@drawable/my_about_icon"
                                 android:layout_marginTop="@dimen/_5sdp"/>
                             <TextView
                                 android:layout_width="match_parent"
@@ -354,7 +354,7 @@
                                 android:textColor="@color/colorPrimary"
                                 android:gravity="center_horizontal"
                                 android:layout_gravity="center_horizontal"
-                                android:text="Setting"
+                                android:text="About"
                                 android:layout_marginBottom="@dimen/_5sdp"/>
 
                         </LinearLayout>

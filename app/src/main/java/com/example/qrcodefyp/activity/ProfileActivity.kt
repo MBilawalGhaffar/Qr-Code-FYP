@@ -64,6 +64,10 @@ class ProfileActivity : AppCompatActivity() {
                     intent.type = "image/*"
                     galleryActivityResultLauncher!!.launch(intent)
                 }
+
+                override fun onImageScan(callback: OnImagePicked?, result: Boolean?) {
+
+                }
             })
             dialog.setCancelable(false)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

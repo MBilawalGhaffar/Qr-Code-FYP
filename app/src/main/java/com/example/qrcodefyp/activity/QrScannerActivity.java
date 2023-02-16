@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ import org.jsoup.select.Elements;
 
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class QrScannerActivity extends AppCompatActivity {
 
@@ -34,7 +37,24 @@ public class QrScannerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_scanner);
         imageView=findViewById(R.id.load_img);
-        new FetchMetadataFromURL().execute();
+//        new FetchMetadataFromURL().execute();
+
+//        String imgRegex = "(?i)<img[^>]+?src\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>";
+//
+//        Pattern p = Pattern.compile(imgRegex);
+//        Matcher m = p.matcher(URL1);
+//
+//        while(m.find()) {
+//            String imgSrc = m.group(1);
+//
+//            String base = Environment.getExternalStorageDirectory().getAbsolutePath().toString()+"/tanadgomaaa";
+//            String imagePath = "file://"+ base + "/test.jpg";
+//            imgSrc=imgSrc.replace(imgSrc,imagePath);
+//
+//        }
+
+
+        Glide.with(getApplicationContext()).load("https://iili.io/HGHBB7j.png").into(imageView);
     }
     private class FetchMetadataFromURL extends AsyncTask<Void, Void, Void> {
         String websiteTitle, websiteDescription, imgurl;
