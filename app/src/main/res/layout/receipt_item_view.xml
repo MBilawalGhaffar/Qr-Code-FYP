@@ -13,10 +13,27 @@
         <ImageView
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_20sdp"
+            android:visibility="gone"
             android:id="@+id/expired"
             android:layout_margin="@dimen/_5sdp"
             android:layout_gravity="end"
             android:src="@drawable/expired_ic"/>
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:visibility="gone"
+            android:id="@+id/upcoming"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_gravity="end"
+            android:src="@drawable/upcoming_ic"/>
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:visibility="gone"
+            android:id="@+id/today"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_gravity="end"
+            android:src="@drawable/today_ic"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

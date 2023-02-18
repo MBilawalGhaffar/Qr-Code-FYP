@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qrcodefyp.R
 import com.example.qrcodefyp.adapter.BillsAdapter
-import com.example.qrcodefyp.adapter.ReceiptsAdapter
+
 import com.example.qrcodefyp.databinding.ActivityMyBillBinding
 import com.example.qrcodefyp.dialog.AddBillDialog
 import com.example.qrcodefyp.dialog.AddBudgetDialog
@@ -61,7 +61,7 @@ class MyBillActivity : AppCompatActivity() {
                 if(snapshot.exists()){
                     Log.e("Receipts","snapshot -> exist")
                     Log.e("Receipts","snapshot -> "+snapshot.value)
-
+                    list.clear()
                     for (snapshot in snapshot.children) {
                         val receiptModel: BillModel = snapshot.getValue(BillModel::class.java)!!
                         Log.e("Receipts","*****************snapshot**************")

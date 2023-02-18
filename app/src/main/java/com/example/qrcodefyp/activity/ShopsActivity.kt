@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qrcodefyp.R
-import com.example.qrcodefyp.adapter.ReceiptsAdapter
+
 import com.example.qrcodefyp.adapter.ShopsAdapter
 import com.example.qrcodefyp.databinding.ActivityShopsBinding
 import com.example.qrcodefyp.model.ReceiptModel
@@ -48,7 +48,7 @@ class ShopsActivity : AppCompatActivity() {
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
-
+                    list.clear()
                     for (snapshot in snapshot.children) {
                         val shopModel: ShopModel = snapshot.getValue(ShopModel::class.java)!!
                         list.add(shopModel)

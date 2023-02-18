@@ -4,4 +4,5 @@ import android.graphics.Bitmap;
 
 public class ScanUtil {
     public static Bitmap scanBitmap;
+    public static Bitmap loadBitmap;
 }

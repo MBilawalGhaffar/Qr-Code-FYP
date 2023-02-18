@@ -43,7 +43,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:hint="Total Bill"
             app:expandedHintEnabled="false"
-            app:placeholderText="100"
+            app:placeholderText="SAR"
 
             >
             <com.google.android.material.textfield.TextInputEditText
