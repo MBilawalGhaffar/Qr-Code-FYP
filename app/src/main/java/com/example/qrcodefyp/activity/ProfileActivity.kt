@@ -45,6 +45,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setTitle(R.string.Profile)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         dialog = Dialog(this)
         dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -129,7 +130,7 @@ class ProfileActivity : AppCompatActivity() {
                                 binding.gender.text=profileModel.gender
                                 binding.buttonAdd.visibility=View.GONE
                             }else {
-                                Toast.makeText(this@ProfileActivity,"User have no record yet, Add profile", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@ProfileActivity,getString(R.string.Add_profile_msg), Toast.LENGTH_SHORT).show()
                                 binding.buttonAdd.visibility=View.VISIBLE
                             }
 
@@ -140,7 +141,7 @@ class ProfileActivity : AppCompatActivity() {
                         }
                     })
                 }else {
-                    Toast.makeText(this@ProfileActivity,"User have no record yet, Add profile", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ProfileActivity,getString(R.string.Add_profile_msg), Toast.LENGTH_SHORT).show()
                     binding.buttonAdd.visibility=View.VISIBLE
                 }
 

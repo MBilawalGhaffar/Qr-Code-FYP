@@ -30,7 +30,7 @@
             android:textColor="@color/colorPrimaryVariant"
             android:textSize="@dimen/_25sdp"
             android:textStyle="bold"
-            android:text="Add New Budget"/>
+            android:text="@string/Add_Budget_Title"/>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -41,7 +41,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:hint="Total Budget"
+            android:hint="@string/Total_Budget"
             app:expandedHintEnabled="false"
             app:placeholderText="100"
 
@@ -61,7 +61,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:hint="Currency"
+            android:hint="@string/Currency"
             app:expandedHintEnabled="false"
             app:placeholderText="SAR"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -86,7 +86,7 @@
             android:layout_marginBottom="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_40sdp"
             app:cornerRadius="@dimen/_16sdp"
-            android:text="Add Budget"
+            android:text="@string/Add_Budget"
             android:textAllCaps="true"
             android:textSize="@dimen/_16sdp"
             android:textStyle="bold"

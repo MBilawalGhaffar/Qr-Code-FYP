@@ -133,13 +133,13 @@ public class AddBudgetDialog extends Dialog {
                 String currency=spinnerCurrency.getText().toString();
 
                 if (totalBudget.isEmpty()){
-                    etTotalBudget.setError("Field can't be  empty");
+                    etTotalBudget.setError(context.getString(R.string.Field_empty));
                     dialog.dismiss();
                     return;
                 }
 
                 if(currency.isEmpty()){
-                    spinnerCurrency.setError("Field can't be  empty");
+                    spinnerCurrency.setError(context.getString(R.string.Field_empty));
                     dialog.dismiss();
                     return;
                 }

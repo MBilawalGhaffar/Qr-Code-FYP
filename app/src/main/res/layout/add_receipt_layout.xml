@@ -30,7 +30,7 @@
             android:textColor="@color/colorPrimaryVariant"
             android:textSize="@dimen/_25sdp"
             android:textStyle="bold"
-            android:text="Add New Receipt"/>
+            android:text="@string/Add_Receipt_title"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:hint="Total Bill"
+                    android:hint="@string/Total_Bill"
                     app:expandedHintEnabled="false"
                     app:placeholderText="SAR"
 
@@ -70,9 +70,9 @@
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:hint="Description"
+                    android:hint="@string/Description"
                     app:expandedHintEnabled="false"
-                    app:placeholderText="XYZ store"
+                    app:placeholderText="@string/store_desc"
 
                     >
                     <com.google.android.material.textfield.TextInputEditText
@@ -89,9 +89,9 @@
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:hint="Category"
+                    android:hint="@string/Category"
                     app:expandedHintEnabled="false"
-                    app:placeholderText="Food"
+                    app:placeholderText="@string/Food"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:orientation="horizontal"
                     >
@@ -110,9 +110,9 @@
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:hint="Payment"
+                    android:hint="@string/Payment"
                     app:expandedHintEnabled="false"
-                    app:placeholderText="Cash"
+                    app:placeholderText="@string/Cash"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:orientation="horizontal"
                     >
@@ -131,7 +131,7 @@
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:hint="Expiry Date"
+                    android:hint="@string/Expiry_Date"
                     app:expandedHintEnabled="false"
                     android:focusable="false"
                     app:placeholderText="DD/MM/YYYY"
@@ -150,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Add receipt image here"/>
+                    android:text="@string/receipt_here"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -241,7 +241,7 @@
             android:layout_marginBottom="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             app:cornerRadius="@dimen/_16sdp"
-            android:text="Add Receipt"
+            android:text="@string/Add_Receipt"
             android:textAllCaps="true"
             android:textSize="@dimen/_16sdp"
             android:textStyle="bold"

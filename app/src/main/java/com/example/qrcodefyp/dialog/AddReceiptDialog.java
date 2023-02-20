@@ -159,8 +159,8 @@ public class AddReceiptDialog extends Dialog {
 
         pickedImage=findViewById(R.id.picked_image);
 
-        categoryArray=new String[]{"Food", "Clothing", "Medicine", "Grocery","Crockery"};
-        paymentArray=new String[]{"Cash", "Debit Card", "Credit Card"};
+        categoryArray=new String[]{mHome.getString(R.string.Food), mHome.getString(R.string.Clothing), mHome.getString(R.string.Medicine), mHome.getString(R.string.Grocery),mHome.getString(R.string.Crockery)};
+        paymentArray=new String[]{mHome.getString(R.string.Cash), mHome.getString(R.string.Debit_Card), mHome.getString(R.string.Credit_Card)};
         ArrayAdapter<String> categoryAdapter =new ArrayAdapter(mHome,R.layout.dropdown_menu_popup_item,categoryArray);
         ArrayAdapter<String> paymentAdapter =new ArrayAdapter(mHome,R.layout.dropdown_menu_popup_item,paymentArray);
         spinnerCategory.setAdapter(categoryAdapter);
@@ -185,33 +185,33 @@ public class AddReceiptDialog extends Dialog {
                 String payment=spinnerPayment.getText().toString();
                 String expiry=expiryDateField.getText().toString();
                 if (totalBill.isEmpty()){
-                    etTotalBill.setError("Field can't be  empty");
+                    etTotalBill.setError(mHome.getString(R.string.Field_empty));
                     dialog.dismiss();
                     return;
                 }
                 if(description.isEmpty()){
-                    etDescription.setError("Field can't be  empty");
+                    etDescription.setError(mHome.getString(R.string.Field_empty));
                     dialog.dismiss();
                     return;
                 }
                 if(category.isEmpty()){
-                    spinnerCategory.setError("Field can't be  empty");
+                    spinnerCategory.setError(mHome.getString(R.string.Field_empty));
                     dialog.dismiss();
                     return;
                 }
                 if(payment.isEmpty()){
-                    spinnerPayment.setError("Field can't be  empty");
+                    spinnerPayment.setError(mHome.getString(R.string.Field_empty));
                     dialog.dismiss();
                     return;
                 }
                 if(expiry.isEmpty()){
-                    expiryDateField.setError("Field can't be  empty");
+                    expiryDateField.setError(mHome.getString(R.string.Field_empty));
                     dialog.dismiss();
                     return;
                 }
                 if(!isImageSelected){
                     dialog.dismiss();
-                    Toast.makeText(mHome,"Please select image first",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mHome,mHome.getString(R.string.select_image),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 int todayBill=Integer.parseInt(totalBill);
@@ -219,10 +219,10 @@ public class AddReceiptDialog extends Dialog {
                 if(mRemainingBudget<todayBill){
                     dialog.dismiss();
                     MaterialAlertDialogBuilder alertDialogBuilder=new MaterialAlertDialogBuilder(mHome);
-                    alertDialogBuilder.setTitle("Budget Alert!");
-                    alertDialogBuilder.setMessage("Your monthly limit exceeded,Please reset your monthly limit.");
+                    alertDialogBuilder.setTitle(mHome.getString(R.string.Budget_Alert));
+                    alertDialogBuilder.setMessage(mHome.getString(R.string.limit_msg));
                     alertDialogBuilder.setCancelable(true);
-                    alertDialogBuilder.setPositiveButton("Ok", new OnClickListener() {
+                    alertDialogBuilder.setPositiveButton(mHome.getString(R.string.Ok), new OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -293,7 +293,7 @@ public class AddReceiptDialog extends Dialog {
                                 openCamera();
                             }
                             else {
-                                Toast.makeText(mHome,"You didn't allow camera permission, Allow it manually",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mHome,mHome.getString(R.string.camera_permission),Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -339,7 +339,7 @@ public class AddReceiptDialog extends Dialog {
                         .Builder
                         .datePicker()
 //                        .setInputMode(MaterialDatePicker.INPUT_MODE_TEXT)
-                        .setTitleText("Select receipt expiry date")
+                        .setTitleText(mHome.getString(R.string.receipt_date))
                         .setCalendarConstraints(constraints).build();
                 datePickerBuilder.show(((AppCompatActivity) activity).getSupportFragmentManager() ,"" );
                 datePickerBuilder.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
@@ -430,11 +430,11 @@ public class AddReceiptDialog extends Dialog {
                                             if(task.isSuccessful()){
                                                 dialog.dismiss();
                                                 dismiss();
-                                                Toast.makeText(mHome,"Receipt add Successfully",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(mHome,mHome.getString(R.string.Receipt_add_msg),Toast.LENGTH_SHORT).show();
 
                                             }else {
                                                 dialog.dismiss();
-                                                Toast.makeText(mHome,"Failed",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(mHome,mHome.getString(R.string.Failed),Toast.LENGTH_SHORT).show();
                                             }
 
                                         }
@@ -443,7 +443,7 @@ public class AddReceiptDialog extends Dialog {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             dialog.dismiss();
-                                            Toast.makeText(mHome,"Failed,"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(mHome,mHome.getString(R.string.Failed)+","+e.getMessage(),Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }
@@ -451,12 +451,12 @@ public class AddReceiptDialog extends Dialog {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             dialog.dismiss();
-                            Toast.makeText(mHome,"Failed,"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mHome,mHome.getString(R.string.Failed)+","+e.getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     });
                 }else {
                     dialog.dismiss();
-                    Toast.makeText(mHome,"Failed...",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mHome,mHome.getString(R.string.Failed)+"...",Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -465,7 +465,7 @@ public class AddReceiptDialog extends Dialog {
             @Override
             public void onFailure(@NonNull Exception e) {
                 dialog.dismiss();
-                Toast.makeText(mHome,"Failed,"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(mHome,mHome.getString(R.string.Failed)+","+e.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }

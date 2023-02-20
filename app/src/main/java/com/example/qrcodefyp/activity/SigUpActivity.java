@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.qrcodefyp.MyApplication;
 import com.example.qrcodefyp.R;
 import com.example.qrcodefyp.model.User;
 import com.example.qrcodefyp.model.UserAuth;

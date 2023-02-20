@@ -3,6 +3,7 @@ package com.example.qrcodefyp.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import com.example.qrcodefyp.MyApplication
 import com.example.qrcodefyp.R
 import com.example.qrcodefyp.databinding.ActivityAboutBinding
 
@@ -12,6 +13,7 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setTitle(R.string.About)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 

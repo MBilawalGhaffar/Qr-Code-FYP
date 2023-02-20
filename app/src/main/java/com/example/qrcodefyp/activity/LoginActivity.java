@@ -15,6 +15,7 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.qrcodefyp.MyApplication;
 import com.example.qrcodefyp.R;
 import com.example.qrcodefyp.dialog.PasswordResetDialog;
 import com.example.qrcodefyp.model.User;
@@ -121,12 +122,12 @@ public class LoginActivity extends AppCompatActivity {
         String mPassword=etPassword.getText().toString();
         if(mEmail.isEmpty()){
             dialog.dismiss();
-            etEmail.setError("Field can't be  empty");
+            etEmail.setError(getString(R.string.Field_empty));
             return;
         }
         if(mPassword.isEmpty()){
             dialog.dismiss();
-            etPassword.setError("Field can't be  empty");
+            etPassword.setError(getString(R.string.Field_empty));
             return;
         }
         if(!mEmail.contains("@gmail.com")){

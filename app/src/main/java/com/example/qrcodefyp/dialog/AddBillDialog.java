@@ -102,17 +102,17 @@ public class AddBillDialog extends Dialog {
                 String description=etDescription.getText().toString();
                 String expiry=billDateField.getText().toString();
                 if (totalBill.isEmpty()){
-                    etTotalBill.setError("Field can't be  empty");
+                    etTotalBill.setError(context.getString(R.string.Field_empty));
                     dialog.dismiss();
                     return;
                 }
                 if(description.isEmpty()){
-                    etDescription.setError("Field can't be  empty");
+                    etDescription.setError(context.getString(R.string.Field_empty));
                     dialog.dismiss();
                     return;
                 }
                 if(expiry.isEmpty()){
-                    billDateField.setError("Field can't be  empty");
+                    billDateField.setError(context.getString(R.string.Field_empty));
                     dialog.dismiss();
                     return;
                 }
@@ -153,7 +153,7 @@ public class AddBillDialog extends Dialog {
                         .Builder
                         .datePicker()
 //                        .setInputMode(MaterialDatePicker.INPUT_MODE_TEXT)
-                        .setTitleText("Select bill date")
+                        .setTitleText(context.getString(R.string.bill_date))
                         .setCalendarConstraints(constraints).build();
                 datePickerBuilder.show(((AppCompatActivity) context).getSupportFragmentManager() ,"" );
                 datePickerBuilder.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
@@ -181,11 +181,11 @@ public class AddBillDialog extends Dialog {
                         if(task.isSuccessful()){
                             dialog.dismiss();
                             dismiss();
-                            Toast.makeText(context,"Bill add Successfully",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,context.getString(R.string.bill_add_msg),Toast.LENGTH_SHORT).show();
 
                         }else {
                             dialog.dismiss();
-                            Toast.makeText(context,"Failed",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,context.getString(R.string.Failed),Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -194,7 +194,7 @@ public class AddBillDialog extends Dialog {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         dialog.dismiss();
-                        Toast.makeText(context,"Failed,"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,context.getString(R.string.Failed)+","+e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
     }

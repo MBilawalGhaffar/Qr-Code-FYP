@@ -31,6 +31,7 @@ class ShopsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityShopsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setTitle(R.string.Shops)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mDatabase = FirebaseDatabase.getInstance()
         Log.e("Receipts","******************************getAllReceipts********************************")

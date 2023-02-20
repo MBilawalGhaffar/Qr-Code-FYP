@@ -30,7 +30,7 @@
             android:textColor="@color/colorPrimaryVariant"
             android:textSize="@dimen/_25sdp"
             android:textStyle="bold"
-            android:text="Add New Bill"/>
+            android:text="@string/Add_New_Bill_title"/>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -41,7 +41,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:hint="Total Bill"
+            android:hint="@string/Total_Bill"
             app:expandedHintEnabled="false"
             app:placeholderText="SAR"
 
@@ -60,9 +60,9 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:hint="Description"
+            android:hint="@string/Description"
             app:expandedHintEnabled="false"
-            app:placeholderText="XYZ bill"
+            app:placeholderText="@string/bill_desc"
 
             >
             <com.google.android.material.textfield.TextInputEditText
@@ -78,7 +78,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:hint="Bill Date"
+            android:hint="@string/Bill_Date"
             app:expandedHintEnabled="false"
             android:focusable="false"
             app:placeholderText="DD/MM/YYYY"
@@ -103,7 +103,7 @@
             android:layout_marginBottom="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_40sdp"
             app:cornerRadius="@dimen/_16sdp"
-            android:text="Add Bill"
+            android:text="@string/Add_Bill"
             android:textAllCaps="true"
             android:textSize="@dimen/_16sdp"
             android:textStyle="bold"

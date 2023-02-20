@@ -6,6 +6,7 @@ import android.view.Window
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.qrcodefyp.MyApplication
 import com.example.qrcodefyp.R
 import com.example.qrcodefyp.dialog.AddBudgetDialog
 import com.example.qrcodefyp.model.BudgetModel
@@ -35,6 +36,7 @@ class BudgetActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_budget)
+        setTitle(R.string.My_Budget)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         myBudgetModel= BudgetModel()
 
@@ -57,19 +59,19 @@ class BudgetActivity : AppCompatActivity() {
 
 
         alertDialogBuilder=MaterialAlertDialogBuilder(this)
-        alertDialogBuilder.setTitle("Budget Reset")
-        alertDialogBuilder.setMessage("Are you sure you want to reset your budget?")
+        alertDialogBuilder.setTitle(getString(R.string.Budget_Reset))
+        alertDialogBuilder.setMessage(getString(R.string.budget_message))
         alertDialogBuilder.setCancelable(true)
-        alertDialogBuilder.setNegativeButton("No") { dialog, which ->
+        alertDialogBuilder.setNegativeButton(getString(R.string.NoKey)) { dialog, which ->
             dialog.dismiss()
         }
-        alertDialogBuilder.setPositiveButton("Yes") { dialog, which ->
+        alertDialogBuilder.setPositiveButton(getString(R.string.YesKey)){ dialog, which ->
             val budgetModel=BudgetModel(0,0,0,"SAR")
             BudgetPreference(this).addBudget(budgetModel)
             FirebaseDatabase.getInstance().getReference(FirebaseUtil.DB_BUDGET_REF)
                 .child(FirebaseUtil.USER.uuid).setValue(budgetModel)
             getBudget()
-            Toast.makeText(this,"Budget Reset",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.Budget_Reset),Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
 

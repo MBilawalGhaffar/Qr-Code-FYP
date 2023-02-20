@@ -52,6 +52,7 @@ class QrCodeScannerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_code_scanner)
+        setTitle(R.string.Scan_Qr)
         webView= findViewById(R.id.webView)
         myImage=findViewById(R.id.myImge)
         webView.getSettings().javaScriptEnabled = true
@@ -113,7 +114,7 @@ class QrCodeScannerActivity : AppCompatActivity() {
                             target: Target<Bitmap?>?,
                             isFirstResource: Boolean
                         ): Boolean {
-                            Toast.makeText(this@QrCodeScannerActivity,"Onfail",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@QrCodeScannerActivity,getString(R.string.Failed),Toast.LENGTH_SHORT).show()
                             return false
                         }
 
@@ -128,7 +129,6 @@ class QrCodeScannerActivity : AppCompatActivity() {
                             scanBitmap=bitmap
                             setResult(RESULT_OK)
                             finish()
-                            Toast.makeText(this@QrCodeScannerActivity,"onResourceReady",Toast.LENGTH_SHORT).show()
                             return false
                         }
                     })
@@ -177,7 +177,7 @@ class QrCodeScannerActivity : AppCompatActivity() {
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
             runOnUiThread {
-                Toast.makeText(this, "Camera initialization error: ${it.message}",
+                Toast.makeText(this, getString(R.string.Camera_error)+" ${it.message}",
                     Toast.LENGTH_LONG).show()
             }
         }
@@ -231,7 +231,7 @@ class QrCodeScannerActivity : AppCompatActivity() {
                 }
             }
         }
-        Toast.makeText(this,"Result",Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this,"Result",Toast.LENGTH_SHORT).show()
 
         this.apply {
             setResult(Activity.RESULT_OK, intent)
@@ -269,7 +269,7 @@ class QrCodeScannerActivity : AppCompatActivity() {
                 if (cameraPermissionGranted()) {
                     initScanner()
                 } else {
-                    Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.Permission_error), Toast.LENGTH_SHORT).show()
                 }
             }
         }

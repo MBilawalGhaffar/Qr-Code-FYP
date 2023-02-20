@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.example.qrcodefyp.MyApplication
 import com.example.qrcodefyp.R
 import com.example.qrcodefyp.model.UserAuth
 import com.example.qrcodefyp.preference.AuthPreference
@@ -29,6 +30,7 @@ class SplashScreen : AppCompatActivity() {
         }else{
             intentActivity=LoginActivity()
         }
+        MyApplication.setLocale(this,"ar")
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, intentActivity::class.java))
             finish()

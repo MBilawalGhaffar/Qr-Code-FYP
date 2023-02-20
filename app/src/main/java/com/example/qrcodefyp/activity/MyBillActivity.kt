@@ -8,6 +8,7 @@ import android.view.Window
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.qrcodefyp.MyApplication
 import com.example.qrcodefyp.R
 import com.example.qrcodefyp.adapter.BillsAdapter
 
@@ -34,6 +35,7 @@ class MyBillActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityMyBillBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setTitle(R.string.My_Bills)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mDatabase = FirebaseDatabase.getInstance()
         getAllBills()
@@ -73,7 +75,7 @@ class MyBillActivity : AppCompatActivity() {
                     billsAdapter.setList(list)
                 }else{
                     Log.e("Receipts","snapshot -> don't exist")
-                    Toast.makeText(this@MyBillActivity,"User have no record yet!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MyBillActivity,getString(R.string.user_no_record), Toast.LENGTH_SHORT).show()
                 }
 
             }

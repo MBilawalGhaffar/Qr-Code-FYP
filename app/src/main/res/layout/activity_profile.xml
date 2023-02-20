@@ -29,7 +29,7 @@
                    android:layout_height="wrap_content"
                    android:layout_weight="20"
                    android:textStyle="bold"
-                   android:text="Name :"
+                   android:text="@string/Name"
                    android:textColor="@color/colorPrimary"
                    android:textSize="@dimen/_14sdp"/>
                <TextView
@@ -53,16 +53,16 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="20"
+                    android:layout_weight="25"
                     android:textStyle="bold"
-                    android:text="Email :"
+                    android:text="@string/Email"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_14sdp"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/email"
-                    android:layout_weight="80"
+                    android:layout_weight="75"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_14sdp"/>
@@ -81,13 +81,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="20"
                     android:textStyle="bold"
-                    android:text="Age :"
+                    android:text="@string/Age"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_14sdp"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/age"
+                    android:layout_marginStart="@dimen/_5sdp"
                     android:layout_weight="80"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
@@ -107,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="25"
                     android:textStyle="bold"
-                    android:text="Gender :"
+                    android:text="@string/Gender"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_14sdp"/>
                 <TextView

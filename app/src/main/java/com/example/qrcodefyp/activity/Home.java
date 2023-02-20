@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.qrcodefyp.BuildConfig;
+import com.example.qrcodefyp.MyApplication;
 import com.example.qrcodefyp.R;
 import com.example.qrcodefyp.callback.OnImagePicked;
 import com.example.qrcodefyp.callback.OnImagePicker;
@@ -201,7 +202,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                         .start(Home.this);
                             }
                         }else{
-                            Toast.makeText(Home.this,"Error while capturing image!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Home.this,getString(R.string.Error_image),Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -347,7 +348,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         new UserPreference(Home.this).addUser(new User("00000000","Ali","ali@gmail.com"));
         new AuthPreference(Home.this).addAuth(new UserAuth(false,false));
         FirebaseAuth.getInstance().signOut();
-        Toast.makeText(Home.this,"Logout successfully!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(Home.this,getString(R.string.Logout_msg),Toast.LENGTH_SHORT).show();
         startActivity(new Intent(Home.this,LoginActivity.class));
         finish();
     }

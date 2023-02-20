@@ -12,6 +12,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.qrcodefyp.MyApplication
 import com.example.qrcodefyp.R
 import com.example.qrcodefyp.databinding.ActivityCurrencyConverterBinding
 
@@ -40,6 +41,7 @@ private val myLink="https://api.getgeoapi.com/v2/currency/convert\n" +
         super.onCreate(savedInstanceState)
         binding=ActivityCurrencyConverterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setTitle(R.string.Currency_Converter)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setUpClickLister()
         setUpCountryPicker()
@@ -55,13 +57,13 @@ private val myLink="https://api.getgeoapi.com/v2/currency/convert\n" +
 
     }
     private fun setUpClickLister() {
-        binding.etSecondCurrency.setText("Converted amount")
+        binding.etSecondCurrency.setText(getString(R.string.Converted_amount))
         //on click btn
         binding.btnConvert.setOnClickListener {
 
             val numberToConvert = binding.etFirstCurrency.text.toString()
             if(numberToConvert.isEmpty() || numberToConvert == "0"){
-                Toast.makeText(this,"Enter Amount first",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.Enter_Amount),Toast.LENGTH_SHORT).show()
             }else{
                 doConversion()
             }
@@ -116,7 +118,7 @@ private val myLink="https://api.getgeoapi.com/v2/currency/convert\n" +
                     binding.etSecondCurrency.text = myResponse.toString()
                     dialog!!.dismiss()
                 }else{
-                    Toast.makeText(this@CurrencyConverterActivity, "Fail to get response", Toast.LENGTH_SHORT)
+                    Toast.makeText(this@CurrencyConverterActivity, getString(R.string.Fail_response), Toast.LENGTH_SHORT)
                         .show()
                     dialog!!.dismiss()
                 }
@@ -124,13 +126,13 @@ private val myLink="https://api.getgeoapi.com/v2/currency/convert\n" +
 
             } catch (e: Exception) {
                 e.printStackTrace()
-                Toast.makeText(this@CurrencyConverterActivity, "Fail to get response", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@CurrencyConverterActivity, getString(R.string.Fail_response), Toast.LENGTH_SHORT).show()
                 dialog!!.dismiss()
             }
 
         },{ error ->
             Log.e("TAG_API", "RESPONSE IS $error")
-            Toast.makeText(this@CurrencyConverterActivity, "Fail to get response", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@CurrencyConverterActivity, getString(R.string.Fail_response), Toast.LENGTH_SHORT).show()
             dialog!!.dismiss()
         })
         queue.add(request)

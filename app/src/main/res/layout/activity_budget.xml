@@ -18,11 +18,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:text="Total Budget"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="@string/Total_Budget"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10sdp" />
 
@@ -56,11 +60,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:text="Used Budget"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="@string/Used_Budget"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10sdp" />
 
@@ -99,7 +107,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:text="Remaining Budget"
+                android:text="@string/Remaining_Budget"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="@dimen/_10sdp" />
 
@@ -144,10 +152,11 @@
     </com.google.android.material.card.MaterialCardView>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/button_reset"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/_120sdp"
         android:layout_height="@dimen/_45sdp"
         android:layout_toLeftOf="@id/button_add"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_20sdp"
@@ -161,7 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Reset"
+            android:text="@string/Reset"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="@dimen/_20sdp"/>

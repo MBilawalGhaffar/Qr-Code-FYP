@@ -2,7 +2,7 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/logout"
-        android:title="Logout"
+        android:title="@string/Logout"
         android:icon="@drawable/logout_icon"
         tools:ignore="HardcodedText" />
 </menu>

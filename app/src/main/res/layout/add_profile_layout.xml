@@ -30,7 +30,7 @@
             android:textColor="@color/colorPrimaryVariant"
             android:textSize="@dimen/_25sdp"
             android:textStyle="bold"
-            android:text="Add Profile"/>
+            android:text="@string/Add_Profile_title"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:hint="Age"
+            android:hint="@string/Age"
             app:expandedHintEnabled="false"
             app:placeholderText="20"
 
@@ -59,7 +59,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:hint="Gender"
+            android:hint="@string/Gender"
             app:expandedHintEnabled="false"
             app:placeholderText="Male"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="Add profile image here"/>
+            android:text="@string/Add_profile_here"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
             android:layout_marginBottom="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             app:cornerRadius="@dimen/_16sdp"
-            android:text="Add Profile"
+            android:text="@string/Add_Profile_title"
             android:textAllCaps="true"
             android:textSize="@dimen/_16sdp"
             android:textStyle="bold"

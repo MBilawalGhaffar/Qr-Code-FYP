@@ -39,7 +39,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Monthly Budget"
+                        android:text="@string/Monthly_Budget"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_10sdp" />
                     <TextView
@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Budget left"
+                        android:text="@string/Budget_left"
                         android:textColor="@android:color/holo_red_dark"
                         android:textSize="@dimen/_10sdp" />
                 </LinearLayout>
@@ -144,7 +144,7 @@
                             android:textColor="@color/colorPrimary"
                             android:gravity="center_horizontal"
                             android:layout_gravity="center_horizontal"
-                            android:text="My Receipts"
+                            android:text="@string/My_Receipts"
                             android:layout_marginBottom="@dimen/_5sdp"/>
 
                     </LinearLayout>
@@ -181,7 +181,7 @@
                             android:textColor="@color/colorPrimary"
                             android:gravity="center_horizontal"
                             android:layout_gravity="center_horizontal"
-                            android:text="My Bills"
+                            android:text="@string/My_Bills"
                             android:layout_marginBottom="@dimen/_5sdp"/>
 
                     </LinearLayout>
@@ -226,7 +226,7 @@
                             android:textColor="@color/colorPrimary"
                             android:gravity="center_horizontal"
                             android:layout_gravity="center_horizontal"
-                            android:text="My Expenses"
+                            android:text="@string/My_Budget"
                             android:layout_marginBottom="@dimen/_5sdp"/>
 
                     </LinearLayout>
@@ -262,7 +262,7 @@
                             android:textColor="@color/colorPrimary"
                             android:gravity="center_horizontal"
                             android:layout_gravity="center_horizontal"
-                            android:text="Currency Converter"
+                            android:text="@string/Currency_Converter"
                             android:layout_marginBottom="@dimen/_5sdp"/>
 
                     </LinearLayout>
@@ -312,7 +312,7 @@
                                 android:textColor="@color/colorPrimary"
                                 android:gravity="center_horizontal"
                                 android:layout_gravity="center_horizontal"
-                                android:text="Shops"
+                                android:text="@string/Shops"
                                 android:layout_marginBottom="@dimen/_5sdp"/>
 
                         </LinearLayout>
@@ -354,7 +354,7 @@
                                 android:textColor="@color/colorPrimary"
                                 android:gravity="center_horizontal"
                                 android:layout_gravity="center_horizontal"
-                                android:text="About"
+                                android:text="@string/About"
                                 android:layout_marginBottom="@dimen/_5sdp"/>
 
                         </LinearLayout>
@@ -396,7 +396,7 @@
                                 android:textColor="@color/colorPrimary"
                                 android:gravity="center_horizontal"
                                 android:layout_gravity="center_horizontal"
-                                android:text="Profile"
+                                android:text="@string/Profile"
                                 android:layout_marginBottom="@dimen/_5sdp"/>
 
                         </LinearLayout>

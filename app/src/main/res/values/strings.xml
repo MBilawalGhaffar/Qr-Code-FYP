@@ -1,17 +1,95 @@
 <resources>
-    <string name="app_name">E-Salik</string>
-    <string name="splash_text">Splash</string>
-    <string name="nav_open">Open</string>
-    <string name="nav_close">Close</string>
-    <string name="my_link">https://api.getgeoapi.com/v2/currency/convert?api_key=70a7cae2c26c8df0defbef9bf91e00f205f0aa4a&amp;from=EUR&amp;to=GBP&amp;amount=10&amp;format=json</string>
-    <string name="cam_image_file_name">camImageFile.jpg</string>
-    <string name="title_activity_my_receipt">My Receipts</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="app_name" translatable="false">E-Salik</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="nav_open" translatable="false">Open</string>
+    <string name="nav_close" translatable="false">Close</string>
+
+    <string name="my_link" translatable="false">https://api.getgeoapi.com/v2/currency/convert?api_key=70a7cae2c26c8df0defbef9bf91e00f205f0aa4a&amp;from=EUR&amp;to=GBP&amp;amount=10&amp;format=json</string>
+    <string name="cam_image_file_name" translatable="false">camImageFile.jpg</string>
+
+
+
+
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
+    <string name="Logout">Logout</string>
+    <string name="About">About</string>
+    <string name="Shops">Shops</string>
+    <string name="Currency_Converter">Currency Converter</string>
+    <string name="Profile">Profile</string>
+    <string name="My_Bills">My Bills</string>
+    <string name="My_Budget">My Budget</string>
+    <string name="Scan_Qr">Scan Qr</string>
+    <string name="Crop">Crop</string>
+    <string name="My_Receipts">My Receipts</string>
+    <string name="Total_Budget">Total Budget</string>
+    <string name="Used_Budget">Used Budget</string>
+    <string name="Remaining_Budget">Remaining Budget</string>
+    <string name="Reset">Reset</string>
+    <string name="Budget_Reset">Budget Reset</string>
+    <string name="budget_message">Are you sure you want to reset your budget?</string>
+    <string name="NoKey">No</string>
+    <string name="YesKey">Yes</string>
+    <string name="Add_Budget">Add Budget</string>
+    <string name="Add_Budget_Title">Add New Budget</string>
+    <string name="Currency">Currency</string>
+    <string name="Field_empty">Field can\'t be  empty</string>
+    <string name="bill_date">Select bill date</string>
+    <string name="bill_add_msg">Bill add Successfully</string>
+    <string name="Failed">Failed</string>
+    <string name="user_no_record">User have no record yet!</string>
+    <string name="Add_New_Bill_title">Add New Bill</string>
+    <string name="Add_Bill">Add Bill</string>
+    <string name="Total_Bill">Total Bill</string>
+    <string name="Description">Description</string>
+    <string name="Bill_Date">Bill Date</string>
+    <string name="Monthly_Budget">Monthly Budget</string>
+    <string name="Budget_left">Budget left</string>
+    <string name="Logout_msg">Logout successfully!</string>
+    <string name="Error_image">Error while capturing image!</string>
+    <string name="Name">Name :</string>
+    <string name="Email">Email :</string>
+    <string name="Age">Age :</string>
+    <string name="Gender">Gender :</string>
+    <string name="Add_profile_msg">User have no record yet, Add profile</string>
+    <string name="Fail_response">Fail to get response</string>
+    <string name="Enter_Amount">Enter Amount first</string>
+    <string name="Converted_amount">Converted amount</string>
+    <string name="Input_amount">Input amount</string>
+    <string name="Convert">Convert</string>
+    <string name="Camera_error">Camera initialization error:</string>
+    <string name="Permission_error">Permissions not granted by the user.</string>
+    <string name="Add_Profile_title">Add Profile</string>
+    <string name="Add_profile_here">Add profile image here</string>
+    <string name="Profile_add_msg">Profile add Successfully</string>
+    <string name="select_image">Please select image first</string>
+    <string name="Forgot_Password_title">Forgot Password</string>
+    <string name="forget_msg">Please enter your email address.You will receive a link to create a new password via email.</string>
+    <string name="Send">Send</string>
+    <string name="enter_email">Please enter valid email</string>
+    <string name="Sending_Email">Sending Email....</string>
+    <string name="check_email">Email is sent to you, please check your email.</string>
+    <string name="Food">Food</string>
+    <string name="Clothing">Clothing</string>
+    <string name="Medicine">Medicine</string>
+    <string name="Grocery">Grocery</string>
+    <string name="Crockery">Crockery</string>
+    <string name="Cash">Cash</string>
+    <string name="Debit_Card">Debit Card</string>
+    <string name="Credit_Card">Credit Card</string>
+    <string name="Budget_Alert">Budget Alert!</string>
+    <string name="limit_msg">Your monthly limit exceeded,Please reset your monthly limit.</string>
+    <string name="Ok">Ok</string>
+    <string name="camera_permission">You didn\'t allow camera permission, Allow it manually</string>
+    <string name="receipt_date">Select receipt expiry date</string>
+    <string name="Receipt_add_msg">Receipt add Successfully</string>
+    <string name="Category">Category</string>
+    <string name="Payment">Payment</string>
+    <string name="Expiry_Date">Expiry Date</string>
+    <string name="receipt_here">Add receipt image here</string>
+    <string name="Add_Receipt">Add Receipt</string>
+    <string name="Add_Receipt_title">Add New Receipt</string>
+    <string name="store_desc">store description</string>
+    <string name="bill_desc">bill description</string>
+
 </resources>

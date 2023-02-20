@@ -129,13 +129,13 @@ public class AddProfileDialog extends Dialog {
                 String totalAge=etAge.getText().toString();
                 String gender=spinnerGender.getText().toString();
                 if (totalAge.isEmpty()){
-                    etAge.setError("Field can't be  empty");
+                    etAge.setError(context.getString(R.string.Field_empty));
                     dialog.dismiss();
                     return;
                 }
 
                 if(gender.isEmpty()){
-                    spinnerGender.setError("Field can't be  empty");
+                    spinnerGender.setError(context.getString(R.string.Field_empty));
                     dialog.dismiss();
                     return;
                 }
@@ -143,7 +143,7 @@ public class AddProfileDialog extends Dialog {
 
                 if(!isImageSelected){
                     dialog.dismiss();
-                    Toast.makeText(context,"Please select image first",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,context.getString(R.string.select_image),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 int age=Integer.parseInt(totalAge);
@@ -187,11 +187,11 @@ public class AddProfileDialog extends Dialog {
                                                     if(task.isSuccessful()){
                                                         dialog.dismiss();
                                                         dismiss();
-                                                        Toast.makeText(context,"Profile add Successfully",Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(context,context.getString(R.string.Profile_add_msg),Toast.LENGTH_SHORT).show();
 
                                                     }else {
                                                         dialog.dismiss();
-                                                        Toast.makeText(context,"Failed",Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(context,context.getString(R.string.Failed),Toast.LENGTH_SHORT).show();
                                                     }
 
                                                 }
@@ -200,7 +200,7 @@ public class AddProfileDialog extends Dialog {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
                                                     dialog.dismiss();
-                                                    Toast.makeText(context,"Failed,"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(context,context.getString(R.string.Failed)+","+e.getMessage(),Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                 }
@@ -208,12 +208,12 @@ public class AddProfileDialog extends Dialog {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     dialog.dismiss();
-                                    Toast.makeText(context,"Failed,"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context,context.getString(R.string.Failed)+","+e.getMessage(),Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }else {
                             dialog.dismiss();
-                            Toast.makeText(context,"Failed...",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,context.getString(R.string.Failed)+"...",Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -222,7 +222,7 @@ public class AddProfileDialog extends Dialog {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         dialog.dismiss();
-                        Toast.makeText(context,"Failed,"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,context.getString(R.string.Failed)+","+e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
     }

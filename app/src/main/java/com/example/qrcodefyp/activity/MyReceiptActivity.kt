@@ -16,6 +16,7 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.example.qrcodefyp.MyApplication
 import com.example.qrcodefyp.R
 import com.example.qrcodefyp.adapter.ReceiptsAdapter
 import com.example.qrcodefyp.databinding.ActivityMyReceiptBinding
@@ -41,6 +42,7 @@ class MyReceiptActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMyReceiptBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setTitle(R.string.My_Receipts)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mDatabase = FirebaseDatabase.getInstance()
         Log.e("Receipts","******************************getAllReceipts********************************")

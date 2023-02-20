@@ -23,7 +23,7 @@
         <activity
             android:name=".activity.AboutActivity"
             android:exported="false"
-            android:label="About"
+            android:label="@string/About"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
@@ -32,7 +32,7 @@
         <activity
             android:name=".activity.ShopsActivity"
             android:exported="false"
-            android:label="Shops"
+            android:label="@string/Shops"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
@@ -41,7 +41,7 @@
         <activity
             android:name=".activity.CurrencyConverterActivity"
             android:exported="false"
-            android:label="Currency Converter"
+            android:label="@string/Currency_Converter"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
@@ -50,7 +50,7 @@
         <activity
             android:name=".activity.ProfileActivity"
             android:exported="false"
-            android:label="Profile"
+            android:label="@string/Profile"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
@@ -59,7 +59,7 @@
         <activity
             android:name=".activity.MyBillActivity"
             android:exported="false"
-            android:label="My Bills"
+            android:label="@string/My_Bills"
             android:screenOrientation="portrait">
             >
             <meta-data
@@ -69,7 +69,7 @@
         <activity
             android:name=".activity.MyReceiptActivity"
             android:exported="false"
-            android:label="@string/title_activity_my_receipt"
+            android:label="@string/My_Receipts"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
@@ -78,7 +78,7 @@
         <activity
             android:name=".activity.BudgetActivity"
             android:exported="false"
-            android:label="My Budget"
+            android:label="@string/My_Budget"
             android:screenOrientation="portrait" /> <!-- <activity -->
         <!-- android:name=".QrCodeScannerActivity" -->
         <!-- android:exported="false"> -->
@@ -89,7 +89,7 @@
         <activity
             android:name=".activity.QrCodeScannerActivity"
             android:exported="false"
-            android:label="Scan Qr"
+            android:label="@string/Scan_Qr"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.google.zxing.client.android.SCAN" />
@@ -132,6 +132,7 @@
         </activity>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:label="@string/Crop"
             android:theme="@style/Base.Theme.AppCompat" />
 
         <provider
