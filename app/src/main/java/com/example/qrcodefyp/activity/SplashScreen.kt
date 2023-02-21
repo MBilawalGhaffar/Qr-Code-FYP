@@ -1,21 +1,22 @@
 package com.example.qrcodefyp.activity
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.appcompat.app.AppCompatActivity
 import com.example.qrcodefyp.MyApplication
 import com.example.qrcodefyp.R
 import com.example.qrcodefyp.model.UserAuth
 import com.example.qrcodefyp.preference.AuthPreference
+import com.example.qrcodefyp.preference.LanguagePreference
 
 class SplashScreen : AppCompatActivity() {
     private lateinit var userAuth: UserAuth
     //intent Activity
     private lateinit var intentActivity: Activity
+    private var isArabic: Boolean=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +31,15 @@ class SplashScreen : AppCompatActivity() {
         }else{
             intentActivity=LoginActivity()
         }
-        MyApplication.setLocale(this,"ar")
+        isArabic=LanguagePreference(this).language
+//        if(isArabic){
+//            MyApplication.setLocale(this,"ar")
+//        }
+        //        Boolean isArabic=new LanguagePreference(this).getLanguage();
+//        if(isArabic){
+//            MyApplication.setLocale(getApplicationContext(),"ar");
+//        }
+
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, intentActivity::class.java))
             finish()
@@ -39,5 +48,10 @@ class SplashScreen : AppCompatActivity() {
 
     override fun onBackPressed() {
 //        super.onBackPressed()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MyApplication.setLocale(this, "ar")
     }
 }

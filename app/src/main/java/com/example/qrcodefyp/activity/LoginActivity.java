@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         if(!mEmail.contains("@gmail.com")){
             dialog.dismiss();
-            Toast.makeText(LoginActivity.this,"Please enter valid email",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,getString(R.string.valid_email),Toast.LENGTH_SHORT).show();
         }else {
             mAuth.signInWithEmailAndPassword(mEmail,mPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -146,12 +146,12 @@ public class LoginActivity extends AppCompatActivity {
                             new AuthPreference(LoginActivity.this).addAuth(new UserAuth(true,isRemember));
                             FirebaseUtil.USER=mUser;
                             dialog.dismiss();
-                            Toast.makeText(LoginActivity.this,"You login with "+mUser.getEmail().toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,getString(R.string.You_login)+" "+mUser.getEmail().toString(),Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this,Home.class));
                             finish();
                         }else {
                             dialog.dismiss();
-                            Toast.makeText(LoginActivity.this,"Your email verification is required, Please check your email",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,getString(R.string.email_verification),Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -213,7 +213,7 @@ public class LoginActivity extends AppCompatActivity {
                     new AuthPreference(LoginActivity.this).addAuth(new UserAuth(true,isRemember));
                     FirebaseUtil.USER=mUser;
                     dialog.dismiss();
-                    Toast.makeText(LoginActivity.this,"You login with "+mUser.getEmail().toString(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,getString(R.string.You_login)+" "+mUser.getEmail().toString(),Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this,Home.class));
                     finish();
                 }
@@ -256,8 +256,13 @@ public class LoginActivity extends AppCompatActivity {
                 // ...
             }
         }else {
-            Toast.makeText(LoginActivity.this,"Something went wrong.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,getString(R.string.Failed),Toast.LENGTH_SHORT).show();
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.setLocale(this,"ar");
+    }
 }

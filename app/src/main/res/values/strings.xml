@@ -47,8 +47,8 @@
     <string name="Budget_left">Budget left</string>
     <string name="Logout_msg">Logout successfully!</string>
     <string name="Error_image">Error while capturing image!</string>
-    <string name="Name">Name :</string>
-    <string name="Email">Email :</string>
+    <string name="Name_">Name :</string>
+    <string name="Email_">Email :</string>
     <string name="Age">Age :</string>
     <string name="Gender">Gender :</string>
     <string name="Add_profile_msg">User have no record yet, Add profile</string>
@@ -91,5 +91,21 @@
     <string name="Add_Receipt_title">Add New Receipt</string>
     <string name="store_desc">store description</string>
     <string name="bill_desc">bill description</string>
+    <string name="Welcome_back">Welcome back</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="Remember_me">Remember me</string>
+    <string name="Forgot_Password">Forgot Password?</string>
+    <string name="Login">Login</string>
+    <string name="Login_with">Or Login with</string>
+    <string name="no_account">Don\'t have account?</string>
+    <string name="Sign_up">Sign up</string>
+    <string name="valid_email">Please enter valid email</string>
+    <string name="email_verification">Your email verification is required, Please check your email</string>
+    <string name="You_login">You login with</string>
+    <string name="Welcome">Welcome</string>
+    <string name="Name">Name</string>
+    <string name="continue_with">Or continue with</string>
+    <string name="have_account">Already have account?</string>
 
 </resources>

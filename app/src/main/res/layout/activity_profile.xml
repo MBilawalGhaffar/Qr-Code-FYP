@@ -29,7 +29,7 @@
                    android:layout_height="wrap_content"
                    android:layout_weight="20"
                    android:textStyle="bold"
-                   android:text="@string/Name"
+                   android:text="@string/Name_"
                    android:textColor="@color/colorPrimary"
                    android:textSize="@dimen/_14sdp"/>
                <TextView
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="25"
                     android:textStyle="bold"
-                    android:text="@string/Email"
+                    android:text="@string/Email_"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_14sdp"/>
                 <TextView

@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
@@ -43,6 +44,7 @@ import com.example.qrcodefyp.model.User;
 import com.example.qrcodefyp.model.UserAuth;
 import com.example.qrcodefyp.preference.AuthPreference;
 import com.example.qrcodefyp.preference.BudgetPreference;
+import com.example.qrcodefyp.preference.LanguagePreference;
 import com.example.qrcodefyp.preference.UserPreference;
 import com.example.qrcodefyp.util.FirebaseUtil;
 import com.example.qrcodefyp.util.NotificationReceiver;
@@ -114,7 +116,27 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
+        MenuItem menuItem = navigationView.getMenu().findItem(R.id.arabic_switch);
+        SwitchCompat switch_id = (SwitchCompat) menuItem.getActionView();
+//        switch_id.setChecked(true);
+        switch_id.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(switch_id.isChecked()){
+                    new LanguagePreference(Home.this).addLanguage(true);
+
+                }else {
+                    new LanguagePreference(Home.this).addLanguage(false);
+                }
+                MyApplication.setLocale(Home.this,"ar");
+                restart();
+            }
+        });
+        if(new LanguagePreference(this).getLanguage()){
+            switch_id.setChecked(true);
+        }
 
         buttonAddReceipt.setOnClickListener(view -> {
                     addReceiptDialog();
@@ -224,7 +246,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 //        Notification(3,"C","c",6);
 
     }
-
+    public void restart() {
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+        finish();
+    }
     private void getBudgetFromDb() {
         firebaseDatabase.getReference(FirebaseUtil.DB_BUDGET_REF).child(user.getUUID()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -250,6 +276,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     protected void onResume() {
         super.onResume();
         getBudget();
+        MyApplication.setLocale(this,"ar");
     }
 
     private void getBudget() {
@@ -426,4 +453,5 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             }
         }
     }
+
 }

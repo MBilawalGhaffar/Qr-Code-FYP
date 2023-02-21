@@ -36,8 +36,8 @@
     <string name="Budget_left">الميزانية المتبقية</string>
     <string name="Logout_msg">تسجيل الخروج بنجاح!</string>
     <string name="Error_image">خطأ أثناء التقاط الصورة!</string>
-    <string name="Name">اسم :</string>
-    <string name="Email">بريد إلكتروني :</string>
+    <string name="Name_">اسم :</string>
+    <string name="Email_">بريد إلكتروني :</string>
     <string name="Age">عمر :</string>
     <string name="Gender">جنس :</string>
     <string name="Add_profile_msg">المستخدم ليس لديه سجل حتى الآن ، إضافة ملف تعريف</string>
@@ -80,5 +80,21 @@
     <string name="Add_Receipt_title">أضف إيصال جديد</string>
     <string name="store_desc">وصف المتجر</string>
     <string name="bill_desc">وصف الفاتورة</string>
+    <string name="Welcome_back">مرحبًا بعودتك</string>
+    <string name="Email">بريد إلكتروني</string>
+    <string name="Password">كلمة المرور</string>
+    <string name="Remember_me">تذكرنى</string>
+    <string name="Forgot_Password">هل نسيت كلمة السر؟</string>
+    <string name="Login">تسجيل الدخول</string>
+    <string name="Login_with">أو تسجيل الدخول باستخدام</string>
+    <string name="no_account">ليس لديك حساب؟</string>
+    <string name="Sign_up">اشتراك</string>
+    <string name="valid_email">الرجاء إدخال بريد إلكتروني صحيح</string>
+    <string name="email_verification">مطلوب التحقق من البريد الإلكتروني الخاص بك ، يرجى التحقق من البريد الإلكتروني الخاص بك</string>
+    <string name="You_login">تقوم بتسجيل الدخول باستخدام</string>
+    <string name="Welcome">مرحباً</string>
+    <string name="Name">اسم</string>
+    <string name="continue_with">أو تواصل مع</string>
+    <string name="have_account">لديك حساب بالفعل؟</string>
 
 </resources>

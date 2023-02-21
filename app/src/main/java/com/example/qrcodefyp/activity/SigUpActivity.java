@@ -247,4 +247,10 @@ public class SigUpActivity extends AppCompatActivity {
             Toast.makeText(SigUpActivity.this,"Something went wrong.",Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.setLocale(this,"ar");
+    }
 }
